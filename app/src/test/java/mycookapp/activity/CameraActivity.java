@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
-
+/** 연동안됐어요**/
 import com.androidstudioprojects.mycookapp.R;
 import com.androidstudioprojects.mycookapp.fragment.Camera2BasicFragment;
 
