@@ -1,4 +1,4 @@
-package mycookapp.view;
+package kr.ac.hs.recipe.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
-import com.androidstudioprojects.mycookapp.R;
+import kr.ac.hs.recipe.R;
 import com.bumptech.glide.Glide;
 
 public class ContentsItemView extends LinearLayout {

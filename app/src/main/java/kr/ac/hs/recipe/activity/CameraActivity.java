@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package mycookapp.activity;
+package kr.ac.hs.recipe.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
-/** 연동안됐어요**/
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.fragment.Camera2BasicFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import static com.androidstudioprojects.mycookapp.Util.INTENT_PATH;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.fragment.Camera2BasicFragment;
+
+import static kr.ac.hs.recipe.Util.INTENT_PATH;
 
 public class CameraActivity extends BasicActivity {
     private Camera2BasicFragment camera2BasicFragment;

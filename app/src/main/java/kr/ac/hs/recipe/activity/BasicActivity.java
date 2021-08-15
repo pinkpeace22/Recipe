@@ -1,10 +1,14 @@
-package mycookapp.activity;
+package kr.ac.hs.recipe.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import kr.ac.hs.recipe.R;
 
 public class BasicActivity extends AppCompatActivity {
     @Override
@@ -13,7 +17,7 @@ public class BasicActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 
     }
-/**
+
    @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
@@ -21,7 +25,7 @@ public class BasicActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
     }
-**/
+
     public void setToolbarTitle(String title){
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){

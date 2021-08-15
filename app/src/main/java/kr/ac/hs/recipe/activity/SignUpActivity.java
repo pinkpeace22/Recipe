@@ -1,4 +1,4 @@
-package mycookapp.activity;
+package kr.ac.hs.recipe.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,14 +8,14 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
-import com.androidstudioprojects.mycookapp.R;
+import kr.ac.hs.recipe.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import static com.androidstudioprojects.mycookapp.Util.showToast;
+import static kr.ac.hs.recipe.Util.showToast;
 
 public class SignUpActivity extends BasicActivity {
     private FirebaseAuth mAuth;

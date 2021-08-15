@@ -1,4 +1,4 @@
-package mycookapp.adapter;
+package kr.ac.hs.recipe.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.UserInfo;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.UserInfo;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package mycookapp.view;
+package kr.ac.hs.recipe.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

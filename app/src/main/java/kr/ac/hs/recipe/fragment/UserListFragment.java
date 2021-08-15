@@ -1,4 +1,4 @@
-package mycookapp.fragment;
+package kr.ac.hs.recipe.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidstudioprojects.mycookapp.PostInfo;
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.UserInfo;
-import com.androidstudioprojects.mycookapp.activity.WritePostActivity;
-import com.androidstudioprojects.mycookapp.adapter.UserListAdapter;
-import com.androidstudioprojects.mycookapp.listener.OnPostListener;
+import kr.ac.hs.recipe.PostInfo;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.UserInfo;
+import kr.ac.hs.recipe.activity.WritePostActivity;
+import kr.ac.hs.recipe.adapter.UserListAdapter;
+import kr.ac.hs.recipe.listener.OnPostListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;

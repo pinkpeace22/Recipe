@@ -1,4 +1,4 @@
-package mycookapp.adapter;
+package kr.ac.hs.recipe.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,12 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidstudioprojects.mycookapp.R;
+import kr.ac.hs.recipe.R;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import static com.androidstudioprojects.mycookapp.Util.INTENT_PATH;
+import static kr.ac.hs.recipe.Util.INTENT_PATH;
 
 public class GalleryAdapter  extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
     private ArrayList<String> mDataset;

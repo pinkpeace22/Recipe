@@ -1,4 +1,4 @@
-package mycookapp.adapter;
+package kr.ac.hs.recipe.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,13 +15,13 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidstudioprojects.mycookapp.FirebaseHelper;
-import com.androidstudioprojects.mycookapp.PostInfo;
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.activity.PostActivity;
-import com.androidstudioprojects.mycookapp.activity.WritePostActivity;
-import com.androidstudioprojects.mycookapp.listener.OnPostListener;
-import com.androidstudioprojects.mycookapp.view.ReadContentsVIew;
+import kr.ac.hs.recipe.FirebaseHelper;
+import kr.ac.hs.recipe.PostInfo;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.activity.PostActivity;
+import kr.ac.hs.recipe.activity.WritePostActivity;
+import kr.ac.hs.recipe.listener.OnPostListener;
+import kr.ac.hs.recipe.view.ReadContentsVIew;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
 import java.util.ArrayList;

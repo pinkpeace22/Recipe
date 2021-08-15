@@ -1,4 +1,4 @@
-package mycookapp.activity;
+package kr.ac.hs.recipe.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.fragment.HomeFragment;
-import com.androidstudioprojects.mycookapp.fragment.UserInfoFragment;
-import com.androidstudioprojects.mycookapp.fragment.UserListFragment;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.fragment.HomeFragment;
+import kr.ac.hs.recipe.fragment.UserInfoFragment;
+import kr.ac.hs.recipe.fragment.UserListFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

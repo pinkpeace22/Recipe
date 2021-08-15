@@ -1,4 +1,4 @@
-package mycookapp.fragment;
+package kr.ac.hs.recipe.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.androidstudioprojects.mycookapp.R;
+import kr.ac.hs.recipe.R;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

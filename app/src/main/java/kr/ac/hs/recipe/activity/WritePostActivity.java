@@ -1,4 +1,4 @@
-package mycookapp.activity;
+package kr.ac.hs.recipe.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,9 +13,9 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
-import com.androidstudioprojects.mycookapp.PostInfo;
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.view.ContentsItemView;
+import kr.ac.hs.recipe.PostInfo;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.view.ContentsItemView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,15 +35,15 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.androidstudioprojects.mycookapp.Util.GALLERY_IMAGE;
-import static com.androidstudioprojects.mycookapp.Util.GALLERY_VIDEO;
-import static com.androidstudioprojects.mycookapp.Util.INTENT_MEDIA;
-import static com.androidstudioprojects.mycookapp.Util.INTENT_PATH;
-import static com.androidstudioprojects.mycookapp.Util.isImageFile;
-import static com.androidstudioprojects.mycookapp.Util.isStorageUrl;
-import static com.androidstudioprojects.mycookapp.Util.isVideoFile;
-import static com.androidstudioprojects.mycookapp.Util.showToast;
-import static com.androidstudioprojects.mycookapp.Util.storageUrlToName;
+import static kr.ac.hs.recipe.Util.GALLERY_IMAGE;
+import static kr.ac.hs.recipe.Util.GALLERY_VIDEO;
+import static kr.ac.hs.recipe.Util.INTENT_MEDIA;
+import static kr.ac.hs.recipe.Util.INTENT_PATH;
+import static kr.ac.hs.recipe.Util.isImageFile;
+import static kr.ac.hs.recipe.Util.isStorageUrl;
+import static kr.ac.hs.recipe.Util.isVideoFile;
+import static kr.ac.hs.recipe.Util.showToast;
+import static kr.ac.hs.recipe.Util.storageUrlToName;
 
 public class WritePostActivity extends BasicActivity {
     private static final String TAG = "WritePostActivity";

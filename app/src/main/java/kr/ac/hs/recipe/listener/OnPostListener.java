@@ -1,6 +1,6 @@
-package mycookapp.listener;
+package kr.ac.hs.recipe.listener;
 
-import com.androidstudioprojects.mycookapp.PostInfo;
+import kr.ac.hs.recipe.PostInfo;
 
 public interface OnPostListener {
     void onDelete(PostInfo postInfo);

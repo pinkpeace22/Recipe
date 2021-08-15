@@ -1,4 +1,4 @@
-package mycookapp;
+package kr.ac.hs.recipe;
 
 import android.app.Activity;
 import android.util.Patterns;

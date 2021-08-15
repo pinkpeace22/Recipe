@@ -1,10 +1,10 @@
-package mycookapp;
+package kr.ac.hs.recipe;
 
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-import com.androidstudioprojects.mycookapp.listener.OnPostListener;
+import kr.ac.hs.recipe.listener.OnPostListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -13,9 +13,9 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-import static com.androidstudioprojects.mycookapp.Util.isStorageUrl;
-import static com.androidstudioprojects.mycookapp.Util.showToast;
-import static com.androidstudioprojects.mycookapp.Util.storageUrlToName;
+import static kr.ac.hs.recipe.Util.isStorageUrl;
+import static kr.ac.hs.recipe.Util.showToast;
+import static kr.ac.hs.recipe.Util.storageUrlToName;
 
 public class FirebaseHelper {
     private Activity activity;
@@ -30,7 +30,7 @@ public class FirebaseHelper {
         this.onPostListener = onPostListener;
     }
 
-    public void storageDelete(final com.androidstudioprojects.mycookapp.PostInfo postInfo){
+    public void storageDelete(final kr.ac.hs.recipe.PostInfo postInfo){
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
@@ -58,7 +58,7 @@ public class FirebaseHelper {
         storeDelete(id, postInfo);
     }
 
-    private void storeDelete(final String id, final com.androidstudioprojects.mycookapp.PostInfo postInfo) {
+    private void storeDelete(final String id, final kr.ac.hs.recipe.PostInfo postInfo) {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         if (successCount == 0) {
             firebaseFirestore.collection("posts").document(id)

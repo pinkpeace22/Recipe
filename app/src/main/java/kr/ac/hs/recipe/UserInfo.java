@@ -1,4 +1,4 @@
-package mycookapp;
+package kr.ac.hs.recipe;
 
 public class UserInfo {
     private String name;

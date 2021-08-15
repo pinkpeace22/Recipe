@@ -1,4 +1,4 @@
-package mycookapp.activity;
+package kr.ac.hs.recipe.activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -15,15 +15,15 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.adapter.GalleryAdapter;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.adapter.GalleryAdapter;
 
 import java.util.ArrayList;
 
-import static com.androidstudioprojects.mycookapp.Util.GALLERY_IMAGE;
-import static com.androidstudioprojects.mycookapp.Util.GALLERY_VIDEO;
-import static com.androidstudioprojects.mycookapp.Util.INTENT_MEDIA;
-import static com.androidstudioprojects.mycookapp.Util.showToast;
+import static kr.ac.hs.recipe.Util.GALLERY_IMAGE;
+import static kr.ac.hs.recipe.Util.GALLERY_VIDEO;
+import static kr.ac.hs.recipe.Util.INTENT_MEDIA;
+import static kr.ac.hs.recipe.Util.showToast;
 
 public class GalleryActivity extends BasicActivity {
 

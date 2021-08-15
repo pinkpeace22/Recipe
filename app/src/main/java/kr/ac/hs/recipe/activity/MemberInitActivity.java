@@ -1,4 +1,4 @@
-package mycookapp.activity;
+package kr.ac.hs.recipe.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.UserInfo;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.UserInfo;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,8 +32,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import static com.androidstudioprojects.mycookapp.Util.INTENT_PATH;
-import static com.androidstudioprojects.mycookapp.Util.showToast;
+import static kr.ac.hs.recipe.Util.INTENT_PATH;
+import static kr.ac.hs.recipe.Util.showToast;
 
 public class MemberInitActivity extends BasicActivity {
     private static final String TAG = "MemberInitActivity";

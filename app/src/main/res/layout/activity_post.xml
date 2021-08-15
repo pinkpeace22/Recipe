@@ -19,12 +19,12 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <com.androidstudioprojects.mycookapp.view.ReadContentsVIew
+            <kr.ac.hs.recipe.view.ReadContentsVIew
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/readContentsView">
 
-            </com.androidstudioprojects.mycookapp.view.ReadContentsVIew>
+            </kr.ac.hs.recipe.view.ReadContentsVIew>
         </LinearLayout>
     </ScrollView>
     <include

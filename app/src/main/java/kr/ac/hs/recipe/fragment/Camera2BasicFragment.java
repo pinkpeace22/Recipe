@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package mycookapp.fragment;
+package kr.ac.hs.recipe.fragment;
 
 import android.Manifest;
 import android.app.Activity;
@@ -60,8 +60,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.view.AutoFitTextureView;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.view.AutoFitTextureView;
 
 import java.io.File;
 import java.io.FileOutputStream;

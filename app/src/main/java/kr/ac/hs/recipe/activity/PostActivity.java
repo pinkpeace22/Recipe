@@ -1,4 +1,4 @@
-package mycookapp.activity;
+package kr.ac.hs.recipe.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,11 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-import com.androidstudioprojects.mycookapp.FirebaseHelper;
-import com.androidstudioprojects.mycookapp.PostInfo;
-import com.androidstudioprojects.mycookapp.R;
-import com.androidstudioprojects.mycookapp.listener.OnPostListener;
-import com.androidstudioprojects.mycookapp.view.ReadContentsVIew;
+import kr.ac.hs.recipe.FirebaseHelper;
+import kr.ac.hs.recipe.PostInfo;
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.listener.OnPostListener;
+import kr.ac.hs.recipe.view.ReadContentsVIew;
 
 public class PostActivity extends BasicActivity {
     private PostInfo postInfo;
