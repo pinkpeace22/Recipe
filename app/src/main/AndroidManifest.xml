@@ -3,8 +3,8 @@
     package="kr.ac.hs.recipe">
 
     <!-- 인터넷 접속 허용 -->
-    <uses-permission android:name = "android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,18 +16,52 @@
         android:usesCleartextTraffic="true">
 
         <!-- 로딩 화면 -->
-        <activity android:name=".ui.LoadingActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-        </activity>
-
         <activity
+            android:name=".ui.LoadingActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
+
+        <!-- 로그인 -->
+        <activity
+            android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="google.com"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.SignUpActivity"></activity>
+        <activity android:name=".activity.PasswordResetActivity"></activity>
+        <activity android:name=".activity.MemberInitActivity"></activity>
+        <activity android:name=".activity.CameraActivity"></activity>
+        <activity android:name=".activity.GalleryActivity"></activity>
+        <activity android:name=".activity.BasicActivity"></activity>
+        <activity android:name=".activity.WritePostActivity"></activity>
+        <activity android:name=".activity.PostActivity"></activity>
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713(광고 안넣음) -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+
+        <!--<activity
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>-->
+
     </application>
 
 </manifest>

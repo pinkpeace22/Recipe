@@ -1,24 +1,42 @@
-package kr.ac.hs.recipe;
+package kr.ac.hs.recipe.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.fragment.HomeFragment;
+import kr.ac.hs.recipe.fragment.UserInfoFragment;
+import kr.ac.hs.recipe.fragment.UserListFragment;
+import kr.ac.hs.recipe.recipeDB.ingredientsData;
+import kr.ac.hs.recipe.recipeDB.recipeData;
+import kr.ac.hs.recipe.recipeDB.stepData;
+import kr.ac.hs.recipe.ui.LoadingActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,20 +48,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 
-import kr.ac.hs.recipe.recipeDB.ingredientsData;
-import kr.ac.hs.recipe.recipeDB.recipeData;
-import kr.ac.hs.recipe.recipeDB.stepData;
-import kr.ac.hs.recipe.ui.LoadingActivity;
-
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BasicActivity {
+    private static final String TAG = "MainActivity";
 
     String key = "1c74fe1f5913c684ec9bb14cc1dd45295904903af4c2012cb985cb757b1a322e";
     int start, end;
     int v_RECIPE_ID, v_NATION_CODE, v_TY_CODE, v_IRDNT_TY_CODE, v_COOKING_NO;
     String v_RECIPE_NM_KO, v_SUMRY, v_NATION_NM, v_TY_NM, v_COOKING_TIME, v_CALORIE, v_QNT, v_LEVEL_NM, v_IRDNT_CODE, v_IRDNT_NM, v_IRDNT_CPCTY, v_IRDNT_TY_NM, v_COOKING_DC, v_STRE_STEP_IMAGE_URL, v_STEP_TIP, v_IMG_URL, v_DET_URL;
-    /*String img_url, det_url;
-    Bitmap v_IMG_URL, v_DET_URL;*/
 
     // Write a message to the database
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
@@ -58,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setToolbarTitle(getResources().getString(R.string.app_name));
+
         Intent intent = new Intent(this, LoadingActivity.class); // 로딩 화면
         startActivity(intent);
 
@@ -113,11 +127,98 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_recipe, R.id.navigation_search, R.id.navigation_community)
+                R.id.navigation_search, R.id.navigation_myInfo, R.id.navigation_userList)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                init();
+                break;
+        }
+    }
+
+    private void init(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser == null) {
+            myStartActivity(SignUpActivity.class);
+        } else {
+            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(firebaseUser.getUid());
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null) {
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            } else {
+                                Log.d(TAG, "No such document");
+                                myStartActivity(MemberInitActivity.class);
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+
+/*            HomeFragment homeFragment = new HomeFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, homeFragment)
+                    .commit();
+
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            HomeFragment homeFragment = new HomeFragment();
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.container, homeFragment)
+                                    .commit();
+                            return true;
+                        case R.id.myInfo:
+                            UserInfoFragment userInfoFragment = new UserInfoFragment();
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.container, userInfoFragment)
+                                    .commit();
+                            return true;
+                        case R.id.userList:
+                            UserListFragment userListFragment = new UserListFragment();
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.container, userListFragment)
+                                    .commit();
+                            return true;
+                    }
+                    return false;
+                }
+            });*/
+        }
+    }
+
+    private void myStartActivity(Class c) {
+        Intent intent = new Intent(this, c);
+        startActivityForResult(intent, 1);
     }
 
     // 데이터 update
@@ -181,9 +282,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 레시피 재료정보
-    // 아니 어이가 없네!!!!!!! [ ] < 이거 json 파싱할때 특수문자 오류나나봄!!!!!! 해결하기
-    // record 자르기 전에 "rows.getJSONObject(i);"를 replace 한 후에 jObject에 넣기 [대책1] 
-    // replace 하거나... 다른 방법 생각해보기
     public void JsonParse_IRDNT(String str) {
         try {
             JSONObject obj = new JSONObject(str);

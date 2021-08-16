@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_recipe">
-
-    <fragment
-        android:id="@+id/navigation_recipe"
-        android:name="kr.ac.hs.recipe.ui.recipe.Recipe"
-        android:label="@string/title_recipe"
-        tools:layout="@layout/recipe" />
+    app:startDestination="@+id/navigation_search">
 
     <fragment
         android:id="@+id/navigation_search"
@@ -18,8 +12,15 @@
         tools:layout="@layout/search" />
 
     <fragment
-        android:id="@+id/navigation_community"
-        android:name="kr.ac.hs.recipe.ui.community.Community"
-        android:label="@string/title_community"
-        tools:layout="@layout/community" />
+        android:id="@+id/navigation_myInfo"
+        android:name="kr.ac.hs.recipe.fragment.UserInfoFragment"
+        android:label="@string/title_myInfo"
+        tools:layout="@layout/fragment_user_info" />
+
+    <fragment
+        android:id="@+id/navigation_userList"
+        android:name="kr.ac.hs.recipe.fragment.UserListFragment"
+        android:label="@string/title_userList"
+        tools:layout="@layout/fragment_user_list" />
+
 </navigation>

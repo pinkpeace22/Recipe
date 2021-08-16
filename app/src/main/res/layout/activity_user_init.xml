@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.recipe.Recipe">
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/view_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,6 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -47,33 +50,43 @@
                         android:src="@android:drawable/sym_def_app_icon" />
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/nameTextView"
+                <EditText
+                    android:id="@+id/nameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="18dp" />
+                    android:ems="10"
+                    android:hint="이름"
+                    android:inputType="textPersonName" />
 
-                <TextView
-                    android:id="@+id/phoneNumberTextView"
+                <EditText
+                    android:id="@+id/phoneNumberEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="18dp" />
+                    android:ems="10"
+                    android:hint="전화번호"
+                    android:inputType="phone" />
 
-                <TextView
-                    android:id="@+id/birthDayTextView"
+                <EditText
+                    android:id="@+id/birthDayEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="18dp" />
+                    android:ems="10"
+                    android:hint="생년월일"
+                    android:inputType="date" />
 
-                <TextView
-                    android:id="@+id/addressTextView"
+                <EditText
+                    android:id="@+id/addressEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="18dp" />
+                    android:ems="10"
+                    android:hint="주소"
+                    android:inputType="textPostalAddress" />
+
+                <Button
+                    android:id="@+id/checkButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="확인" />
 
             </LinearLayout>
         </LinearLayout>
@@ -120,6 +133,6 @@
         layout="@layout/view_loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
-</LinearLayout>
+</RelativeLayout>
