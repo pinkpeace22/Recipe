@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import kr.ac.hs.recipe.R;
 
 public class CustomAdapter extends BaseAdapter {
-    private ArrayList<ListView> itemList = new ArrayList<ListView>() ;
+    public ArrayList<ListView> itemList = new ArrayList<ListView>() ;
 
     public CustomAdapter() {
 

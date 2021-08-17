@@ -46,6 +46,7 @@
         <activity android:name=".activity.BasicActivity"></activity>
         <activity android:name=".activity.WritePostActivity"></activity>
         <activity android:name=".activity.PostActivity"></activity>
+        <activity android:name=".ui.search.Result"></activity>
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713(광고 안넣음) -->
         <meta-data

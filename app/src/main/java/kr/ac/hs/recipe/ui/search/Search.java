@@ -2,6 +2,7 @@ package kr.ac.hs.recipe.ui.search;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -314,9 +315,14 @@ public class Search extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               // textView.setText();
-                Toast.makeText(getActivity(), position+1 + " 번째 선택! ", Toast.LENGTH_SHORT).show();
+                // textView.setText();
+                //Toast.makeText(getActivity(), position+1 + " 번째 선택! ", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), Result.class);
+                intent.putExtra("name", adapter.itemList.get(position).getName());
+                intent.putExtra("about", adapter.itemList.get(position).getAbout());
+                intent.putExtra("mainImg", adapter.itemList.get(position).getBImg());
 
+                startActivity(intent);
             }
         });
 

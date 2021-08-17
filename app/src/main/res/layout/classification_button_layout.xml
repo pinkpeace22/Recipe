@@ -18,6 +18,6 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textSize="6pt"
-        android:textColor="#897697" />
+        android:textColor="@color/searchTextColor" />
 
 </LinearLayout>
