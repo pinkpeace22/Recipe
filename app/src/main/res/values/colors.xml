@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#A082BD</color>
+<!--    <color name="colorPrimary">#A082BD</color>
     <color name="colorPrimaryDark">#584769</color>
     <color name="colorAccent">#737373</color>
-    <color name="searchTextColor">#897697</color>
+    <color name="searchTextColor">#897697</color>-->
 
-<!--
     <color name="colorPrimary">#FFCE4D</color>
     <color name="colorPrimaryDark">#FFBB08</color>
     <color name="colorAccent">#737373</color>
     <color name="searchTextColor">#C6A477</color>
--->
 
 
    <!-- <color name="colorPrimary">#83C26F</color>
