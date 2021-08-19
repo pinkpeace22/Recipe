@@ -17,7 +17,7 @@
 
         <!-- 로딩 화면 -->
         <activity
-            android:name=".ui.LoadingActivity"
+            android:name=".activity.LoadingActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
 
         <!-- 로그인 -->
@@ -46,7 +46,7 @@
         <activity android:name=".activity.BasicActivity"></activity>
         <activity android:name=".activity.WritePostActivity"></activity>
         <activity android:name=".activity.PostActivity"></activity>
-        <activity android:name=".ui.search.Result"></activity>
+        <!--<activity android:name=".ui.search.Result"></activity>-->
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713(광고 안넣음) -->
         <meta-data

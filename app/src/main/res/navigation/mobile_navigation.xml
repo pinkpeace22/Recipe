@@ -12,15 +12,15 @@
         tools:layout="@layout/search" />
 
     <fragment
+        android:id="@+id/navigation_keep"
+        android:name="kr.ac.hs.recipe.fragment.UserListFragment"
+        android:label="@string/title_keepList"
+        tools:layout="@layout/fragment_user_list" />
+
+    <fragment
         android:id="@+id/navigation_myInfo"
         android:name="kr.ac.hs.recipe.fragment.UserInfoFragment"
         android:label="@string/title_myInfo"
         tools:layout="@layout/fragment_user_info" />
-
-    <fragment
-        android:id="@+id/navigation_userList"
-        android:name="kr.ac.hs.recipe.fragment.UserListFragment"
-        android:label="@string/title_userList"
-        tools:layout="@layout/fragment_user_list" />
 
 </navigation>

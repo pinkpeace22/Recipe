@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Recipe</string>
     <string name="title_search">검색</string>
+    <string name="title_keepList">찜 목록</string>
     <string name="title_myInfo">내 정보</string>
-    <string name="title_userList">사용자 목록</string>
 
     <string name="request_permission">This sample needs camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>

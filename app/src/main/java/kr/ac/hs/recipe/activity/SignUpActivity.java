@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 
 import kr.ac.hs.recipe.R;
-import kr.ac.hs.recipe.ui.LoadingActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

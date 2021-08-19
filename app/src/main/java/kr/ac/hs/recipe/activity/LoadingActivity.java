@@ -1,4 +1,4 @@
-package kr.ac.hs.recipe.ui;
+package kr.ac.hs.recipe.activity;
 
 import android.app.Activity;
 import android.os.Bundle;

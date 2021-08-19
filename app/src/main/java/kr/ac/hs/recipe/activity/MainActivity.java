@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -16,13 +15,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import kr.ac.hs.recipe.R;
-import kr.ac.hs.recipe.fragment.HomeFragment;
-import kr.ac.hs.recipe.fragment.UserInfoFragment;
-import kr.ac.hs.recipe.fragment.UserListFragment;
 import kr.ac.hs.recipe.recipeDB.ingredientsData;
 import kr.ac.hs.recipe.recipeDB.recipeData;
 import kr.ac.hs.recipe.recipeDB.stepData;
-import kr.ac.hs.recipe.ui.LoadingActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -127,7 +122,7 @@ public class MainActivity extends BasicActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_search, R.id.navigation_myInfo, R.id.navigation_userList)
+                R.id.navigation_search, R.id.navigation_myInfo, R.id.navigation_keep)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

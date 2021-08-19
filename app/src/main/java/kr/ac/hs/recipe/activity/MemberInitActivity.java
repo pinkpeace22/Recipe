@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 
 import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.UserInfo;
-import kr.ac.hs.recipe.ui.LoadingActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;

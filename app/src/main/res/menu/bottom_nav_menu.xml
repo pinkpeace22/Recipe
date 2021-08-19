@@ -7,13 +7,13 @@
         android:title="@string/title_search" />
 
     <item
+        android:id="@+id/navigation_keep"
+        android:icon="@drawable/ic_keep"
+        android:title="@string/title_keepList" />
+
+    <item
         android:id="@+id/navigation_myInfo"
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="@string/title_myInfo" />
-
-    <item
-        android:id="@+id/navigation_userList"
-        android:icon="@drawable/ic_group_black_24dp"
-        android:title="@string/title_userList" />
 
 </menu>
