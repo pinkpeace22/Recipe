@@ -69,7 +69,7 @@ public class Search extends Fragment {
         listView = v.findViewById(R.id.searchlist);
         adapter = new CustomAdapter();
 
-        textView = v.findViewById(R.id.searchRT);
+        /*textView = v.findViewById(R.id.searchRT);*/
 
         // 분류버튼 검색 기능
         // 난이도 버튼
@@ -317,12 +317,12 @@ public class Search extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // textView.setText();
                 //Toast.makeText(getActivity(), position+1 + " 번째 선택! ", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), Result.class);
+                /*Intent intent = new Intent(getActivity(), Result.class);
                 intent.putExtra("name", adapter.itemList.get(position).getName());
                 intent.putExtra("about", adapter.itemList.get(position).getAbout());
                 intent.putExtra("mainImg", adapter.itemList.get(position).getBImg());
 
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 

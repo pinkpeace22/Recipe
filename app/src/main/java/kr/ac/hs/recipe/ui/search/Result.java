@@ -1,3 +1,4 @@
+/*
 package kr.ac.hs.recipe.ui.search;
 
 import android.app.Activity;
@@ -26,3 +27,4 @@ public class Result extends Activity {
         textView.append(intent.getStringExtra("about"));
     }
 }
+*/
