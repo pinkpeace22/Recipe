@@ -39,13 +39,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
-                    android:button="@drawable/keep_selector"/>
+                    android:button="@drawable/keep_selector"
+                    android:focusable="false"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/searchlist_about"
                     android:layout_width="match_parent"

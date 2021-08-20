@@ -318,7 +318,7 @@ public class Search extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // textView.setText();
-                //Toast.makeText(getActivity(), position+1 + " 번째 선택! ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), position+1 + " 번째 선택! ", Toast.LENGTH_SHORT).show();
                 /*Intent intent = new Intent(getActivity(), Result.class);
                 intent.putExtra("name", adapter.itemList.get(position).getName());
                 intent.putExtra("about", adapter.itemList.get(position).getAbout());
