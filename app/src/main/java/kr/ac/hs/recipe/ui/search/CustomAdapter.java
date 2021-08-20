@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +46,7 @@ public class CustomAdapter extends BaseAdapter {
             holder.imageView = v.findViewById(R.id.searchlist_img);
             holder.nameView = v.findViewById(R.id.searchlist_name) ;
             holder.aboutView = v.findViewById(R.id.searchlist_about) ;
+            holder.keepView = v.findViewById(R.id.keepBtn);
 
             v.setTag(holder);
         }
@@ -122,5 +125,7 @@ public class CustomAdapter extends BaseAdapter {
     {
         public ImageView imageView;
         public TextView nameView, aboutView;
+        //public Button keepView;
+        public CheckBox keepView;
     }
 }

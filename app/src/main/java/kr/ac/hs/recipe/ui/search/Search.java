@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,6 +50,7 @@ public class Search extends Fragment {
     Button[] tyBtnArr = new Button[17];
     String searchBtnText;
     int toggle = 0;
+    CheckBox keepBtn;
 
     TextView textView;
 
@@ -65,7 +67,7 @@ public class Search extends Fragment {
         searchList = v.findViewById(R.id.searchlist_layout);
         searchLoading = v.findViewById(R.id.searchLoading_layout);
         backBtn = v.findViewById(R.id.backtoSearchBtn);
-        backBtn.setColorFilter(Color.parseColor("#80688A"));
+        //backBtn.setColorFilter(Color.parseColor("#80688A"));
         listView = v.findViewById(R.id.searchlist);
         adapter = new CustomAdapter();
 
