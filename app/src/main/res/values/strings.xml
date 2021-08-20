@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recipe</string>
+    <string name="app_name">콕콕봐</string>
     <string name="title_search">검색</string>
     <string name="title_keepList">찜 목록</string>
     <string name="title_myInfo">내 정보</string>
