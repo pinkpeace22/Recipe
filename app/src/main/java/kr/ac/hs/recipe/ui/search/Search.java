@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,7 +40,7 @@ public class Search extends Fragment {
     EditText searchText;
     LinearLayout classification, searchList, searchLoading;
     ImageView backBtn;
-    ListView listView;
+    public ListView listView;
     CustomAdapter adapter;
     ToggleButton searchToggle;
     int[] lvBtn = {R.id.lv1, R.id.lv2, R.id.lv3}; // 난이도
@@ -69,6 +70,7 @@ public class Search extends Fragment {
         backBtn = v.findViewById(R.id.backtoSearchBtn);
         //backBtn.setColorFilter(Color.parseColor("#80688A"));
         listView = v.findViewById(R.id.searchlist);
+        listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         adapter = new CustomAdapter();
 
         /*textView = v.findViewById(R.id.searchRT);*/

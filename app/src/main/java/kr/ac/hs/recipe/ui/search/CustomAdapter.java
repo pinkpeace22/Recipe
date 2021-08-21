@@ -3,12 +3,14 @@ package kr.ac.hs.recipe.ui.search;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.telephony.ims.ImsMmTelManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +37,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Context context = parent.getContext();
+        final int checkBoxPosition = position;
         View v = convertView;
         ViewHolder holder;
 
@@ -61,6 +64,22 @@ public class CustomAdapter extends BaseAdapter {
         holder.imageView.setImageBitmap(listItem.getBImg());
         holder.nameView.setText(listItem.getName());
         holder.aboutView.setText(listItem.getAbout());
+
+        holder.keepView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ListView checkViewItem = (ListView) getItem(checkBoxPosition);
+                if(checkViewItem.isChecked){
+                    itemList.get(checkBoxPosition).isChecked = false;
+                }
+                else {
+                    itemList.get(checkBoxPosition).isChecked = true;
+                }
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.keepView.setChecked(itemList.get(position).isChecked);
 
         return v;
     }

@@ -7,6 +7,7 @@ public class ListView {
     private Bitmap Img;
     private String nameStr;
     private String aboutStr ;
+    public boolean isChecked;
 
     //public void setBImg(String img) { Img = img; }
     public void setBImg(Bitmap img) { Img = img; }
