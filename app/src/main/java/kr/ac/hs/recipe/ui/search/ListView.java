@@ -1,12 +1,15 @@
 package kr.ac.hs.recipe.ui.search;
 
 import android.graphics.Bitmap;
+import org.parceler.Parcel;
 
+@Parcel
 public class ListView {
     //private String Img;
     private Bitmap Img;
     private String nameStr;
     private String aboutStr ;
+    private String seq;
     public boolean isChecked;
 
     //public void setBImg(String img) { Img = img; }
@@ -17,6 +20,9 @@ public class ListView {
     public void setAbout(String about) {
         aboutStr = about ;
     }
+    public void setSeq(String seq) {
+        this.seq = seq;
+    }
 
     //public String getBImg() { return this.Img ; }
     public Bitmap getBImg() { return this.Img ; }
@@ -25,5 +31,18 @@ public class ListView {
     }
     public String getAbout() {
         return this.aboutStr ;
+    }
+    public String getSeq() {
+        return seq;
+    }
+
+    @Override
+    public String toString() {
+        return "ListView{" +
+                "Img=" + Img +
+                ", nameStr='" + nameStr + '\'' +
+                ", aboutStr='" + aboutStr + '\'' +
+                ", seq='" + seq + '\'' +
+                '}';
     }
 }

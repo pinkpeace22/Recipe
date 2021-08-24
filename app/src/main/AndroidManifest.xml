@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="kr.ac.hs.recipe">
 
     <!-- 인터넷 접속 허용 -->
@@ -7,13 +8,17 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name="App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_app_main"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_app_main_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:label">
+
 
         <!-- 로딩 화면 -->
         <activity
@@ -46,7 +51,7 @@
         <activity android:name=".activity.BasicActivity"></activity>
         <activity android:name=".activity.WritePostActivity"></activity>
         <activity android:name=".activity.PostActivity"></activity>
-        <!--<activity android:name=".ui.search.Result"></activity>-->
+        <activity android:name=".activity.RecipeActivity" />
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713(광고 안넣음) -->
         <meta-data

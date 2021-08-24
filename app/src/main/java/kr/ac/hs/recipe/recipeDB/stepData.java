@@ -21,4 +21,15 @@ public class stepData {
         this.STRE_STEP_IMAGE_URL = STRE_STEP_IMAGE_URL;
         this.STEP_TIP = STEP_TIP;
     }
+
+    @Override
+    public String toString() {
+        return "stepData{" +
+                "RECIPE_ID=" + RECIPE_ID +
+                ", COOKING_NO=" + COOKING_NO +
+                ", COOKING_DC='" + COOKING_DC + '\'' +
+                ", STRE_STEP_IMAGE_URL='" + STRE_STEP_IMAGE_URL + '\'' +
+                ", STEP_TIP='" + STEP_TIP + '\'' +
+                '}';
+    }
 }

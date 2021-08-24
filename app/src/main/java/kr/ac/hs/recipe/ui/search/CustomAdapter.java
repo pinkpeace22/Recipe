@@ -3,24 +3,24 @@ package kr.ac.hs.recipe.ui.search;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.telephony.ims.ImsMmTelManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.io.*;
 
 import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.activity.MainActivity;
 
 public class CustomAdapter extends BaseAdapter {
     public ArrayList<ListView> itemList = new ArrayList<ListView>() ;
@@ -74,6 +74,7 @@ public class CustomAdapter extends BaseAdapter {
                 }
                 else {
                     itemList.get(checkBoxPosition).isChecked = true;
+                    Toast.makeText(v.getContext(), itemList.get(checkBoxPosition).getName() + " 즐겨찾기! ", Toast.LENGTH_SHORT).show();
                 }
                 notifyDataSetChanged();
             }
@@ -94,7 +95,7 @@ public class CustomAdapter extends BaseAdapter {
         return itemList.get(position) ;
     }
 
-    public void addItem(String url, String name, String about) {
+    public void addItem(String url, String name, String about,String seq) {
         ListView item = new ListView();
 
         Bitmap img = urlToBitmap(url); // url > bitmap
@@ -102,6 +103,7 @@ public class CustomAdapter extends BaseAdapter {
         item.setBImg(img);
         item.setName(name);
         item.setAbout(about);
+        item.setSeq(seq);
 
         itemList.add(item);
     }
@@ -144,7 +146,6 @@ public class CustomAdapter extends BaseAdapter {
     {
         public ImageView imageView;
         public TextView nameView, aboutView;
-        //public Button keepView;
         public CheckBox keepView;
     }
 }

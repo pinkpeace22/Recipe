@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +32,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.parceler.Parcels;
+
+import kr.ac.hs.recipe.L;
 import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.activity.RecipeActivity;
 import kr.ac.hs.recipe.recipeDB.ingredientsData;
 import kr.ac.hs.recipe.recipeDB.recipeData;
+import timber.log.Timber;
 
 public class Search extends Fragment {
 
@@ -101,7 +107,7 @@ public class Search extends Fragment {
                                 try {
                                     recipeData getResult = postSnapshot.getValue(recipeData.class);
                                     if (getResult.LEVEL_NM.equals(searchBtnText)) { // 검색 내용이 포함된 메뉴만 반환
-                                        adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY);
+                                        adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY, String.valueOf(getResult.RECIPE_ID));
                                     }
                                 } catch (Exception e) {
                                 }
@@ -144,7 +150,7 @@ public class Search extends Fragment {
                                 try {
                                     recipeData getResult = postSnapshot.getValue(recipeData.class);
                                     if (getResult.NATION_NAME.equals(searchBtnText)) { // 검색 내용이 포함된 메뉴만 반환
-                                        adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY);
+                                        adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY, String.valueOf(getResult.RECIPE_ID));
                                     }
                                 } catch (Exception e) {
                                 }
@@ -188,7 +194,7 @@ public class Search extends Fragment {
                                 try {
                                     recipeData getResult = postSnapshot.getValue(recipeData.class);
                                     if (getResult.TY_NM.equals(searchBtnText)) { // 검색 내용이 포함된 메뉴만 반환
-                                        adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY);
+                                        adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY, String.valueOf(getResult.RECIPE_ID));
                                     }
                                 } catch (Exception e) {
                                 }
@@ -242,7 +248,7 @@ public class Search extends Fragment {
                                     try {
                                         recipeData getResult = postSnapshot.getValue(recipeData.class);
                                         if (getResult.RECIPE_NM_KO.contains(String.valueOf(searchText.getText()))) { // 검색 내용이 포함된 메뉴만 반환
-                                            adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY);
+                                            adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY, String.valueOf(getResult.RECIPE_ID));
                                         }
                                     } catch (Exception e) {
                                     }
@@ -270,7 +276,7 @@ public class Search extends Fragment {
                                                 ingredientsData getIRDNT = postSnapshot2.getValue(ingredientsData.class);
                                                 // equals가 나을지 contains가 나을지?????
                                                 if (getIRDNT.IRDNT_NM.equals(String.valueOf(searchText.getText())) && getResult.RECIPE_ID == getIRDNT.RECIPE_ID) { // 검색 내용(재료)이 포함된 메뉴만 반환
-                                                    adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY);
+                                                    adapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY, String.valueOf(getResult.RECIPE_ID));
                                                 }
                                             } catch (Exception e) {
                                             }
@@ -320,13 +326,12 @@ public class Search extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // textView.setText();
-                Toast.makeText(getActivity(), position+1 + " 번째 선택! ", Toast.LENGTH_SHORT).show();
-                /*Intent intent = new Intent(getActivity(), Result.class);
-                intent.putExtra("name", adapter.itemList.get(position).getName());
-                intent.putExtra("about", adapter.itemList.get(position).getAbout());
-                intent.putExtra("mainImg", adapter.itemList.get(position).getBImg());
+                //Toast.makeText(getActivity(), adapter.itemList.get(position).getName() + " 선택! ", Toast.LENGTH_SHORT).show();
 
-                startActivity(intent);*/
+                kr.ac.hs.recipe.ui.search.ListView item = (kr.ac.hs.recipe.ui.search.ListView) adapter.getItem(position);
+                Intent intent = new Intent(getActivity(), RecipeActivity.class);
+                intent.putExtra("EXTRA_SELECTED_ITEM",Parcels.wrap(item));
+                startActivity(intent);
             }
         });
 

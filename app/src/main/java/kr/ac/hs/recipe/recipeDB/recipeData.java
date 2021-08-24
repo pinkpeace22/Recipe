@@ -39,4 +39,24 @@ public class recipeData {
         this.IMG_URL = IMG_URL;
         this.DET_URL = DET_URL;
     }
+
+    @Override
+    public String toString() {
+        return "recipeData{" +
+                "RECIPE_ID=" + RECIPE_ID +
+                ", RECIPE_NM_KO='" + RECIPE_NM_KO + '\'' +
+                ", SUMRY='" + SUMRY + '\'' +
+                ", NATION_CODE=" + NATION_CODE +
+                ", NATION_NAME='" + NATION_NAME + '\'' +
+                ", TY_CODE=" + TY_CODE +
+                ", TY_NM='" + TY_NM + '\'' +
+                ", COOKING_TIME='" + COOKING_TIME + '\'' +
+                ", CALORIE='" + CALORIE + '\'' +
+                ", QNT='" + QNT + '\'' +
+                ", LEVEL_NM='" + LEVEL_NM + '\'' +
+                ", IRDNT_CODE='" + IRDNT_CODE + '\'' +
+                ", IMG_URL='" + IMG_URL + '\'' +
+                ", DET_URL='" + DET_URL + '\'' +
+                '}';
+    }
 }
