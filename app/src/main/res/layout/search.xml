@@ -580,7 +580,7 @@
                 <ProgressBar
                     android:layout_width="65dp"
                     android:layout_height="40dp"
-                    android:indeterminateTint="#80688A"/>
+                    android:indeterminateTint="@color/colorPrimaryDark"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -1,6 +1,7 @@
 package kr.ac.hs.recipe.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -18,7 +19,9 @@ import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.recipeDB.ingredientsData;
 import kr.ac.hs.recipe.recipeDB.recipeData;
 import kr.ac.hs.recipe.recipeDB.stepData;
+import kr.ac.hs.recipe.ui.search.CustomAdapter;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,15 +40,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends BasicActivity {
     private static final String TAG = "MainActivity";
+    public static Context mContext;
 
     String key = "1c74fe1f5913c684ec9bb14cc1dd45295904903af4c2012cb985cb757b1a322e";
     int start, end;
@@ -66,9 +75,11 @@ public class MainActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setToolbarTitle(getResources().getString(R.string.app_name));
+        mContext = this;
 
         Intent intent = new Intent(this, LoadingActivity.class); // 로딩 화면
         startActivity(intent);
+        readKeepListFromFile(); // 즐겨찾기 불러오기
 
         //myRef.removeValue(); // drop all DB
         //updateData();
@@ -397,6 +408,34 @@ public class MainActivity extends BasicActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    // 즐겨찾기 파일 저장
+    public void saveKeepListToFile() {
+       ArrayList<String> saveKeep = new ArrayList();
+        saveKeep.addAll(CustomAdapter.keepList);
+        try {
+            FileOutputStream fos = openFileOutput("keepListFile.txt", MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(saveKeep);
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 즐겨찾기 파일 불러오기
+    public void readKeepListFromFile(){
+        try {
+            FileInputStream fis = openFileInput("keepListFile.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList readedObject = (ArrayList) ois.readObject();
+            CustomAdapter.keepList.clear();
+            CustomAdapter.keepList.addAll(readedObject);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

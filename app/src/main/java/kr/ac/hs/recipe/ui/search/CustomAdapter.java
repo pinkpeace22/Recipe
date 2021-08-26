@@ -1,8 +1,12 @@
 package kr.ac.hs.recipe.ui.search;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,9 +30,10 @@ import kr.ac.hs.recipe.activity.MainActivity;
 
 public class CustomAdapter extends BaseAdapter {
     public ArrayList<ListView> itemList = new ArrayList<ListView>() ;
+    public ArrayList<String> keeping = new ArrayList<String>();
+    public static ArrayList<String> keepList = new ArrayList<String>(); // 즐겨찾기 목록
 
     public CustomAdapter() {
-
     }
 
     @Override
@@ -66,21 +73,39 @@ public class CustomAdapter extends BaseAdapter {
         holder.aboutView.setText(listItem.getAbout());
 
         holder.keepView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 ListView checkViewItem = (ListView) getItem(checkBoxPosition);
-                if(checkViewItem.isChecked){
+
+                if (checkViewItem.isChecked) {
                     itemList.get(checkBoxPosition).isChecked = false;
-                }
-                else {
+
+                    keepList.remove(String.valueOf(itemList.get(checkBoxPosition).getSeq()));
+                    while (keeping.remove(String.valueOf(itemList.get(checkBoxPosition).getSeq()))) {
+                    }
+                } else {
                     itemList.get(checkBoxPosition).isChecked = true;
-                    Toast.makeText(v.getContext(), itemList.get(checkBoxPosition).getName() + " 즐겨찾기! ", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(v.getContext(), itemList.get(checkBoxPosition).getSeq() + " 즐겨찾기! ", Toast.LENGTH_SHORT).show();
+
+                    keeping.add(itemList.get(checkBoxPosition).getSeq());
+                    for (String item : keeping) {
+                        if (!keepList.contains(item))
+                            keepList.add(item);
+                    }
                 }
+                ((MainActivity) MainActivity.mContext).saveKeepListToFile();
                 notifyDataSetChanged();
             }
         });
 
-        holder.keepView.setChecked(itemList.get(position).isChecked);
+        if (keepList.contains(itemList.get(position).getSeq())) {
+            holder.keepView.setChecked(true);
+            itemList.get(checkBoxPosition).isChecked = true;
+        } else {
+            holder.keepView.setChecked(false);
+            itemList.get(checkBoxPosition).isChecked = false;
+        }
 
         return v;
     }
