@@ -1,4 +1,4 @@
-package kr.ac.hs.recipe.ui.search;
+package kr.ac.hs.recipe.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,18 +27,18 @@ import java.io.*;
 
 import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.activity.MainActivity;
+import kr.ac.hs.recipe.ui.search.CustomAdapter;
+import kr.ac.hs.recipe.ui.search.ListView;
 
-public class CustomAdapter extends BaseAdapter {
-    public ArrayList<ListView> itemList = new ArrayList<ListView>() ;
-    public static ArrayList<String> keeping = new ArrayList<String>();
-    public static ArrayList<String> keepList = new ArrayList<String>(); // 즐겨찾기 목록
+public class KeepListAdapter extends BaseAdapter {
+    public ArrayList<ListView> keepedItem = new ArrayList<ListView>() ;
 
-    public CustomAdapter() {
+    public KeepListAdapter() {
     }
 
     @Override
     public int getCount() {
-        return itemList.size() ;
+        return keepedItem.size() ;
     }
 
     @Override
@@ -50,13 +50,13 @@ public class CustomAdapter extends BaseAdapter {
 
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.searchlist_layout, parent, false);
+            v = inflater.inflate(R.layout.keeplist_layout, parent, false);
 
             holder = new ViewHolder();
-            holder.imageView = v.findViewById(R.id.searchlist_img);
-            holder.nameView = v.findViewById(R.id.searchlist_name) ;
-            holder.aboutView = v.findViewById(R.id.searchlist_about) ;
-            holder.keepView = v.findViewById(R.id.keepBtn);
+            holder.keepImageView = v.findViewById(R.id.keeplist_img);
+            holder.keepNameView = v.findViewById(R.id.keeplist_name) ;
+            holder.keepAboutView = v.findViewById(R.id.keeplist_about) ;
+            holder.keeplistView = v.findViewById(R.id.keeplist_btn);
 
             v.setTag(holder);
         }
@@ -64,34 +64,34 @@ public class CustomAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        ListView listItem = itemList.get(position);
+        ListView listItem = keepedItem.get(position);
 
         //Bitmap img = urlToBitmap(listItem.getBImg());
         //holder.imageView.setImageBitmap(img);
-        holder.imageView.setImageBitmap(listItem.getBImg());
-        holder.nameView.setText(listItem.getName());
-        holder.aboutView.setText(listItem.getAbout());
+        holder.keepImageView.setImageBitmap(listItem.getBImg());
+        holder.keepNameView.setText(listItem.getName());
+        holder.keepAboutView.setText(listItem.getAbout());
 
-        holder.keepView.setOnClickListener(new View.OnClickListener() {
+        holder.keeplistView.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 ListView checkViewItem = (ListView) getItem(checkBoxPosition);
 
                 if (checkViewItem.isChecked) {
-                    itemList.get(checkBoxPosition).isChecked = false;
+                    keepedItem.get(checkBoxPosition).isChecked = false;
 
-                    keepList.remove(String.valueOf(itemList.get(checkBoxPosition).getSeq()));
-                    while (keeping.remove(String.valueOf(itemList.get(checkBoxPosition).getSeq()))) {
+                    CustomAdapter.keepList.remove(String.valueOf(keepedItem.get(checkBoxPosition).getSeq()));
+                    while (CustomAdapter.keeping.remove(String.valueOf(keepedItem.get(checkBoxPosition).getSeq()))) {
                     }
                 } else {
-                    itemList.get(checkBoxPosition).isChecked = true;
+                    keepedItem.get(checkBoxPosition).isChecked = true;
                     //Toast.makeText(v.getContext(), itemList.get(checkBoxPosition).getSeq() + " 즐겨찾기! ", Toast.LENGTH_SHORT).show();
 
-                    keeping.add(itemList.get(checkBoxPosition).getSeq());
-                    for (String item : keeping) {
-                        if (!keepList.contains(item))
-                            keepList.add(item);
+                    CustomAdapter.keeping.add(keepedItem.get(checkBoxPosition).getSeq());
+                    for (String item : CustomAdapter.keeping) {
+                        if (!CustomAdapter.keepList.contains(item))
+                            CustomAdapter.keepList.add(item);
                     }
                 }
                 ((MainActivity) MainActivity.mContext).saveKeepListToFile();
@@ -99,12 +99,12 @@ public class CustomAdapter extends BaseAdapter {
             }
         });
 
-        if (keepList.contains(itemList.get(position).getSeq())) {
-            holder.keepView.setChecked(true);
-            itemList.get(checkBoxPosition).isChecked = true;
+        if (CustomAdapter.keepList.contains(keepedItem.get(position).getSeq())) {
+            holder.keeplistView.setChecked(true);
+            keepedItem.get(checkBoxPosition).isChecked = true;
         } else {
-            holder.keepView.setChecked(false);
-            itemList.get(checkBoxPosition).isChecked = false;
+            holder.keeplistView.setChecked(false);
+            keepedItem.get(checkBoxPosition).isChecked = false;
         }
 
         return v;
@@ -117,7 +117,7 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return itemList.get(position) ;
+        return keepedItem.get(position) ;
     }
 
     public void addItem(String url, String name, String about,String seq) {
@@ -130,7 +130,7 @@ public class CustomAdapter extends BaseAdapter {
         item.setAbout(about);
         item.setSeq(seq);
 
-        itemList.add(item);
+        keepedItem.add(item);
     }
 
     //URL을 받아 Bitmap 파일로 전환
@@ -164,13 +164,13 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     public void clear() {
-        itemList.clear();
+        keepedItem.clear();
     }
 
     public class ViewHolder
     {
-        public ImageView imageView;
-        public TextView nameView, aboutView;
-        public CheckBox keepView;
+        public ImageView keepImageView;
+        public TextView keepNameView, keepAboutView;
+        public CheckBox keeplistView;
     }
 }

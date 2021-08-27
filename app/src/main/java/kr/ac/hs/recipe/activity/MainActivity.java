@@ -79,7 +79,7 @@ public class MainActivity extends BasicActivity {
 
         Intent intent = new Intent(this, LoadingActivity.class); // 로딩 화면
         startActivity(intent);
-        readKeepListFromFile(); // 즐겨찾기 불러오기
+        readKeepListFromFile(); // 즐겨찾기 파일 불러오기
 
         //myRef.removeValue(); // drop all DB
         //updateData();
@@ -133,7 +133,7 @@ public class MainActivity extends BasicActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_search, R.id.navigation_myInfo, R.id.navigation_keep)
+                R.id.navigation_search, R.id.navigation_keep, R.id.navigation_myInfo)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

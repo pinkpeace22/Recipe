@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_keep"
-        android:name="kr.ac.hs.recipe.fragment.UserListFragment"
+        android:name="kr.ac.hs.recipe.fragment.KeepListFragment"
         android:label="@string/title_keepList"
-        tools:layout="@layout/fragment_user_list" />
+        tools:layout="@layout/fragment_keep_list" />
 
     <fragment
         android:id="@+id/navigation_myInfo"
