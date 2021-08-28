@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.epoxy.EpoxyAsyncUtil;
 import com.airbnb.epoxy.EpoxyRecyclerView;
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
 import kr.ac.hs.recipe.L;
 import kr.ac.hs.recipe.MediaManager;
 import kr.ac.hs.recipe.R;
@@ -58,6 +61,7 @@ public class RecipeActivity extends BasicActivity {
     private Disposable disposalCheckUpdateTimer;
 
     private long ramainTimerCount = 0;
+    private boolean isTimerPuase = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,11 +215,23 @@ public class RecipeActivity extends BasicActivity {
             timerDialog.show(getSupportFragmentManager(), "TAG_TIMER_DIALOG");
         });
 
-        btnTimerStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancelTimer();
+        btnTimerStop.setOnClickListener(view -> {
+            if(ramainTimerCount == 0){
+                Toast.makeText(getApplicationContext(), "시간 설정이 되어있어야합니다.", Toast.LENGTH_SHORT).show();
+                return;
             }
+            if(!isTimerPuase){
+                //정지 되어있지 않은상태라면? 즉 타이머가 돌아가는상태.
+                btnTimerStop.setText("재시작");
+                isTimerPuase = true;
+                cancelTimer();
+            }else{
+                // 정지 되어있는상태 즉 타이머를 다시 돌려야함.
+                btnTimerStop.setText("일시 정지");
+                isTimerPuase = false;
+                timerStart((int)ramainTimerCount);
+            }
+
         });
 
         btnTimerReset.setOnClickListener(new View.OnClickListener() {
@@ -224,6 +240,8 @@ public class RecipeActivity extends BasicActivity {
                 ramainTimerCount = 0;
                 cancelTimer();
                 tvCountDownValue.setText("");
+                isTimerPuase = false;
+                btnTimerStop.setText("일시 정지");
 
             }
         });
@@ -236,17 +254,15 @@ public class RecipeActivity extends BasicActivity {
     }
 
     private void timerStart(int targetTime) {
-
-        if (ramainTimerCount == 0) {
-            ramainTimerCount = targetTime;
-        } else {
-            ramainTimerCount += targetTime;
-        }
+        ramainTimerCount = targetTime;
         L.i("::::카운트다운 시간...");
         long totalTime = ramainTimerCount - 1;
         disposalCheckUpdateTimer = Flowable.intervalRange(0, ramainTimerCount, 0, 1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(countTime -> tvCountDownValue.setText(convertTime(totalTime - countTime)))
+                .doOnNext(countTime -> {
+                    ramainTimerCount = totalTime - countTime;
+                    tvCountDownValue.setText(RecipeActivity.this.convertTime(totalTime - countTime));
+                })
                 .doOnComplete(() -> {
                     ramainTimerCount = 0;
                     L.i("::::::doOnComplete:::::::");
@@ -261,7 +277,7 @@ public class RecipeActivity extends BasicActivity {
             // 아래 설정된 mp3. 플레이
 
 
-            mp3MediaManager.doPlayWithAsset("test.mp3");
+            mp3MediaManager.doPlayWithAsset("timer_sound.mp3");
         } catch (IOException e) {
             e.printStackTrace();
         }

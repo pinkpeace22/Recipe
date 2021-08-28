@@ -1,5 +1,9 @@
 package kr.ac.hs.recipe.fragment;
 
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+
+import java.lang.reflect.Field;
 
 import kr.ac.hs.recipe.L;
 import kr.ac.hs.recipe.R;

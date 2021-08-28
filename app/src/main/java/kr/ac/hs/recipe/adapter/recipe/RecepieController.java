@@ -25,6 +25,7 @@ public class RecepieController extends EpoxyController {
         this.summaryData = item;
         requestModelBuild();
     }
+
     public void updateReceipeItems(List<stepData> items) {
         this.receipeList = items;
         requestModelBuild();
@@ -65,7 +66,7 @@ public class RecepieController extends EpoxyController {
             add(new TitleModel_().id("receipe_title").title("레시피").textColorCode("#ff5733"));
             for (stepData data : recepieResults) {
                 new ReceipeModel_().id(data.COOKING_NO)
-                        .title(data.COOKING_NO + " -> " + data.COOKING_DC)
+                        .title("[" + data.COOKING_NO + "] " + data.COOKING_DC)
                         .tip(data.STEP_TIP)
                         .imgUrl(data.STRE_STEP_IMAGE_URL)
                         .addTo(this);
