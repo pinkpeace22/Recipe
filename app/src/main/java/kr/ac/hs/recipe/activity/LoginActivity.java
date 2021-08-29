@@ -30,6 +30,8 @@ public class LoginActivity extends BasicActivity {
 
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
         findViewById(R.id.passwordResetButton).setOnClickListener(onClickListener);
+        findViewById(R.id.facebookButton).setOnClickListener(onClickListener);
+        findViewById(R.id.googleButton).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -41,6 +43,12 @@ public class LoginActivity extends BasicActivity {
                     break;
                 case R.id.passwordResetButton:
                     myStartActivity(PasswordResetActivity.class);
+                    break;
+                case R.id.facebookButton:
+                    myStartActivity(FacebookLoginActivity.class);
+                    break;
+                case R.id.googleButton:
+                    myStartActivity(GoogleSignInActivity.class);
                     break;
             }
         }

@@ -63,7 +63,7 @@
                 android:layout_weight="1"
                 android:text="로그인" />
 
-            <Button
+            <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebookButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:layout_weight="1"
                 android:text="트위터로 로그인" />
 
-            <Button
+            <com.google.android.gms.common.SignInButton
                 android:id="@+id/googleButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
         android:background="#000"
         android:layout_below="@+id/toolbar"
-        tools:context="com.example.sns_project.activity.CameraActivity" />
+        tools:context="kr.ac.hs.recipe.activity.CameraActivity" />
 
 
 </RelativeLayout>

@@ -53,6 +53,11 @@
         <activity android:name=".activity.PostActivity"></activity>
         <activity android:name=".activity.RecipeActivity" />
 
+        <!--facebook ID -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"
+            tools:replace="android:value"/>
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713(광고 안넣음) -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

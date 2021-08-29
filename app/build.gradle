@@ -73,7 +73,7 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
 
     implementation 'com.google.firebase:firebase-database'
-    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
 
     //github
     implementation 'com.github.bumptech.glide:glide:4.12.0'
@@ -86,6 +86,11 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.15.0'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.15.0'
 
+    //facebook
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+
+    //google
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
 
     implementation 'com.jakewharton.timber:timber:5.0.1'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'

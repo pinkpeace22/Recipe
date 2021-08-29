@@ -83,7 +83,8 @@ public class MainActivity extends BasicActivity {
 
         //myRef.removeValue(); // drop all DB
         //updateData();
-
+        //사용자 로그아웃
+        FirebaseAuth.getInstance().signOut();
 
         // 앱 최초 실행 여부 판단
         SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
@@ -438,4 +439,5 @@ public class MainActivity extends BasicActivity {
             e.printStackTrace();
         }
     }
+
 }
