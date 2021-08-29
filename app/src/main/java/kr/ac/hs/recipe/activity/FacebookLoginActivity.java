@@ -1,8 +1,11 @@
 package kr.ac.hs.recipe.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,33 +25,37 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Arrays;
+
+import kr.ac.hs.recipe.activity.FacebookLoginActivity;
+
 /**
  * Demonstrate Firebase Authentication using a Facebook access token.
  */
 public class FacebookLoginActivity extends BasicActivity {
-
     private static final String TAG = "FacebookLogin";
-
     // [START declare_auth]
     private FirebaseAuth mAuth;
+    private LoginButton facebookButton;
+    private LoginCallback mLoginCallback;
+    private Button facebookcustomButton;
     // [END declare_auth]
-
     private CallbackManager mCallbackManager;
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // [START initialize_auth]
-        // Initialize Firebase Auth
+        mContext = getApplicationContext();
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
 
         // [START initialize_fblogin]
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.facebookButton);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        mLoginCallback = new LoginCallback();
+        facebookButton = (LoginButton)findViewById(R.id.facebookButton);
+        facebookButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+        facebookButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "페이스북 로그인 성공!:" + loginResult);
@@ -64,8 +71,16 @@ public class FacebookLoginActivity extends BasicActivity {
             public void onError(FacebookException error) {
                 Log.d(TAG, "페이스북 로그인 실패.", error);
             }
+
         });
         // [END initialize_fblogin]
+        facebookcustomButton = (Button) findViewById(R.id.facebookcustomButton);
+        facebookcustomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                facebookcustomButton.performClick();
+            }
+        });
     }
 
     // [START on_start_check_user]
@@ -81,10 +96,10 @@ public class FacebookLoginActivity extends BasicActivity {
     // [START on_activity_result]
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
         // Pass the activity result back to the Facebook SDK
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
     // [END on_activity_result]
 
@@ -117,4 +132,5 @@ public class FacebookLoginActivity extends BasicActivity {
     private void updateUI(FirebaseUser user) {
 
     }
+
 }

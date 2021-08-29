@@ -3,6 +3,7 @@ package kr.ac.hs.recipe.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
@@ -20,6 +21,7 @@ import static kr.ac.hs.recipe.Util.showToast;
 
 public class SignUpActivity extends BasicActivity {
     private FirebaseAuth mAuth;
+    private Button facebookcustomButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,15 @@ public class SignUpActivity extends BasicActivity {
         findViewById(R.id.login_Button).setOnClickListener(onClickListener);
         findViewById(R.id.facebookButton).setOnClickListener(onClickListener);
         findViewById(R.id.googleButton).setOnClickListener(onClickListener);
+
+        facebookcustomButton = (Button) findViewById(R.id.facebookcustomButton);
+        facebookcustomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            facebookcustomButton.performClick();
+        }
+
+    });
     }
 
     @Override

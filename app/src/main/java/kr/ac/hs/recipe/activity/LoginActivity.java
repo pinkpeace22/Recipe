@@ -3,12 +3,14 @@ package kr.ac.hs.recipe.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
 import kr.ac.hs.recipe.R;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -19,6 +21,7 @@ import static kr.ac.hs.recipe.Util.showToast;
 
 public class LoginActivity extends BasicActivity {
     private FirebaseAuth mAuth;
+    private Button facebookcustomButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,8 @@ public class LoginActivity extends BasicActivity {
         findViewById(R.id.passwordResetButton).setOnClickListener(onClickListener);
         findViewById(R.id.facebookButton).setOnClickListener(onClickListener);
         findViewById(R.id.googleButton).setOnClickListener(onClickListener);
+
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

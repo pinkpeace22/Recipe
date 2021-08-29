@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -50,11 +55,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.security.MessageDigest;
+
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends BasicActivity {
     private static final String TAG = "MainActivity";
     public static Context mContext;
+    private Context meContext;
+
 
     String key = "1c74fe1f5913c684ec9bb14cc1dd45295904903af4c2012cb985cb757b1a322e";
     int start, end;
@@ -76,6 +85,7 @@ public class MainActivity extends BasicActivity {
         setContentView(R.layout.activity_main);
         setToolbarTitle(getResources().getString(R.string.app_name));
         mContext = this;
+        meContext = getApplicationContext();
 
         Intent intent = new Intent(this, LoadingActivity.class); // 로딩 화면
         startActivity(intent);
@@ -84,7 +94,8 @@ public class MainActivity extends BasicActivity {
         //myRef.removeValue(); // drop all DB
         //updateData();
         //사용자 로그아웃
-        FirebaseAuth.getInstance().signOut();
+     //   FirebaseAuth.getInstance().signOut();
+        getHashKey(meContext);
 
         // 앱 최초 실행 여부 판단
         SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
@@ -98,7 +109,7 @@ public class MainActivity extends BasicActivity {
                 public void onDataChange(DataSnapshot snapshot) {
                     String last_update = snapshot.getValue().toString();
                     String now_date = now.toString();
-                    if (!last_update.equals(now_date)){
+                    if (!last_update.equals(now_date)) {
                         updateData();
                     }
                 }
@@ -117,7 +128,7 @@ public class MainActivity extends BasicActivity {
                 public void onDataChange(DataSnapshot snapshot) {
                     String last_update = snapshot.getValue().toString();
                     String now_date = now.toString();
-                    if (!last_update.equals(now_date)){
+                    if (!last_update.equals(now_date)) {
                         updateData();
                     }
                 }
@@ -142,6 +153,34 @@ public class MainActivity extends BasicActivity {
 
         init();
     }
+    // 프로젝트의 해시키를 반환
+
+    @Nullable
+    public static String getHashKey(Context context) {
+        final String TAG = "KeyHash";
+        String keyHash = null;
+        try {
+            PackageInfo info =
+                    context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHHA");
+                md.update(signature.toByteArray());
+                keyHash = new String(Base64.encode(md.digest(), 0));
+                Log.d(TAG, keyHash);
+            }
+        } catch (Exception e) {
+            Log.e("name not found", e.toString());
+        }
+
+
+        if (keyHash != null) {
+            return keyHash;
+        } else {
+            return null;
+        }
+
+    }
 
     @Override
     protected void onResume() {
@@ -149,7 +188,7 @@ public class MainActivity extends BasicActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
     }
 
@@ -163,7 +202,7 @@ public class MainActivity extends BasicActivity {
         }
     }
 
-    private void init(){
+    private void init() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser == null) {
             myStartActivity(SignUpActivity.class);
@@ -414,7 +453,7 @@ public class MainActivity extends BasicActivity {
 
     // 즐겨찾기 파일 저장
     public void saveKeepListToFile() {
-       ArrayList<String> saveKeep = new ArrayList();
+        ArrayList<String> saveKeep = new ArrayList();
         saveKeep.addAll(CustomAdapter.keepList);
         try {
             FileOutputStream fos = openFileOutput("keepListFile.txt", MODE_PRIVATE);
@@ -428,7 +467,7 @@ public class MainActivity extends BasicActivity {
     }
 
     // 즐겨찾기 파일 불러오기
-    public void readKeepListFromFile(){
+    public void readKeepListFromFile() {
         try {
             FileInputStream fis = openFileInput("keepListFile.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);

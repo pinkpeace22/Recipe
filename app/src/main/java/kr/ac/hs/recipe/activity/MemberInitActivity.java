@@ -60,6 +60,7 @@ public class MemberInitActivity extends BasicActivity {
         findViewById(R.id.checkButton).setOnClickListener(onClickListener);
         findViewById(R.id.picture).setOnClickListener(onClickListener);
         findViewById(R.id.gallery).setOnClickListener(onClickListener);
+
     }
 
     @Override
