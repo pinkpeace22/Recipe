@@ -9,7 +9,7 @@
         android:id="@+id/navigation_search"
         android:name="kr.ac.hs.recipe.ui.search.Search"
         android:label="@string/title_search"
-        tools:layout="@layout/search" />
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_keep"

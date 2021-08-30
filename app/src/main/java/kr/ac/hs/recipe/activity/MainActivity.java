@@ -4,16 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -55,15 +50,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.security.MessageDigest;
-
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends BasicActivity {
     private static final String TAG = "MainActivity";
     public static Context mContext;
-    private Context meContext;
-
 
     String key = "1c74fe1f5913c684ec9bb14cc1dd45295904903af4c2012cb985cb757b1a322e";
     int start, end;
@@ -85,7 +76,6 @@ public class MainActivity extends BasicActivity {
         setContentView(R.layout.activity_main);
         setToolbarTitle(getResources().getString(R.string.app_name));
         mContext = this;
-        meContext = getApplicationContext();
 
         Intent intent = new Intent(this, LoadingActivity.class); // 로딩 화면
         startActivity(intent);
@@ -93,9 +83,7 @@ public class MainActivity extends BasicActivity {
 
         //myRef.removeValue(); // drop all DB
         //updateData();
-        //사용자 로그아웃
-     //   FirebaseAuth.getInstance().signOut();
-        getHashKey(meContext);
+
 
         // 앱 최초 실행 여부 판단
         SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
@@ -109,7 +97,7 @@ public class MainActivity extends BasicActivity {
                 public void onDataChange(DataSnapshot snapshot) {
                     String last_update = snapshot.getValue().toString();
                     String now_date = now.toString();
-                    if (!last_update.equals(now_date)) {
+                    if (!last_update.equals(now_date)){
                         updateData();
                     }
                 }
@@ -128,7 +116,7 @@ public class MainActivity extends BasicActivity {
                 public void onDataChange(DataSnapshot snapshot) {
                     String last_update = snapshot.getValue().toString();
                     String now_date = now.toString();
-                    if (!last_update.equals(now_date)) {
+                    if (!last_update.equals(now_date)){
                         updateData();
                     }
                 }
@@ -153,34 +141,6 @@ public class MainActivity extends BasicActivity {
 
         init();
     }
-    // 프로젝트의 해시키를 반환
-
-    @Nullable
-    public static String getHashKey(Context context) {
-        final String TAG = "KeyHash";
-        String keyHash = null;
-        try {
-            PackageInfo info =
-                    context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md;
-                md = MessageDigest.getInstance("SHHA");
-                md.update(signature.toByteArray());
-                keyHash = new String(Base64.encode(md.digest(), 0));
-                Log.d(TAG, keyHash);
-            }
-        } catch (Exception e) {
-            Log.e("name not found", e.toString());
-        }
-
-
-        if (keyHash != null) {
-            return keyHash;
-        } else {
-            return null;
-        }
-
-    }
 
     @Override
     protected void onResume() {
@@ -188,7 +148,7 @@ public class MainActivity extends BasicActivity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause(){
         super.onPause();
     }
 
@@ -202,7 +162,7 @@ public class MainActivity extends BasicActivity {
         }
     }
 
-    private void init() {
+    private void init(){
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser == null) {
             myStartActivity(SignUpActivity.class);
@@ -299,29 +259,32 @@ public class MainActivity extends BasicActivity {
             JSONObject obj = new JSONObject(str);
             JSONArray rows = obj.getJSONObject("Grid_20150827000000000226_1").getJSONArray("row");
             for (int i = 0; i < rows.length(); i++) {
-                JSONObject jObject = rows.getJSONObject(i);
-                v_RECIPE_ID = jObject.getInt("RECIPE_ID");
-                v_RECIPE_NM_KO = jObject.getString("RECIPE_NM_KO");
-                v_SUMRY = jObject.getString("SUMRY");
-                v_NATION_CODE = jObject.getInt("NATION_CODE");
-                v_NATION_NM = jObject.getString("NATION_NM");
-                v_TY_CODE = jObject.getInt("TY_CODE");
-                v_TY_NM = jObject.getString("TY_NM");
-                v_COOKING_TIME = jObject.getString("COOKING_TIME");
-                v_CALORIE = jObject.getString("CALORIE");
-                v_QNT = jObject.getString("QNT");
-                v_LEVEL_NM = jObject.getString("LEVEL_NM");
-                v_IRDNT_CODE = jObject.getString("IRDNT_CODE");
-                v_IMG_URL = jObject.getString("IMG_URL");
-                v_DET_URL = jObject.getString("DET_URL");
+                try {
+                    JSONObject jObject = rows.getJSONObject(i);
+                    v_RECIPE_ID = jObject.getInt("RECIPE_ID");
+                    v_RECIPE_NM_KO = jObject.getString("RECIPE_NM_KO");
+                    v_SUMRY = jObject.getString("SUMRY");
+                    v_NATION_CODE = jObject.getInt("NATION_CODE");
+                    v_NATION_NM = jObject.getString("NATION_NM");
+                    v_TY_CODE = jObject.getInt("TY_CODE");
+                    v_TY_NM = jObject.getString("TY_NM");
+                    v_COOKING_TIME = jObject.getString("COOKING_TIME");
+                    v_CALORIE = jObject.getString("CALORIE");
+                    v_QNT = jObject.getString("QNT");
+                    v_LEVEL_NM = jObject.getString("LEVEL_NM");
+                    v_IRDNT_CODE = jObject.getString("IRDNT_CODE");
+                    v_IMG_URL = jObject.getString("IMG_URL");
+                    v_DET_URL = jObject.getString("DET_URL");
                 /*img_url = jObject.getString("IMG_URL");
                 v_IMG_URL = urlToBitmap(img_url);
                 det_url = jObject.getString("DET_URL");
                 v_DET_URL = urlToBitmap(det_url);*/
 
-                //firebase에 data input
-                recipeData = new recipeData(v_RECIPE_ID, v_RECIPE_NM_KO, v_SUMRY, v_NATION_CODE, v_NATION_NM, v_TY_CODE, v_TY_NM, v_COOKING_TIME, v_CALORIE, v_QNT, v_LEVEL_NM, v_IRDNT_CODE, v_IMG_URL, v_DET_URL);
-                recipeDBRef.child("recipe_ID").child(String.valueOf(v_RECIPE_ID)).setValue(recipeData);
+                    //firebase에 data input
+                    recipeData = new recipeData(v_RECIPE_ID, v_RECIPE_NM_KO, v_SUMRY, v_NATION_CODE, v_NATION_NM, v_TY_CODE, v_TY_NM, v_COOKING_TIME, v_CALORIE, v_QNT, v_LEVEL_NM, v_IRDNT_CODE, v_IMG_URL, v_DET_URL);
+                    recipeDBRef.child("recipe_ID").child(String.valueOf(v_RECIPE_ID)).setValue(recipeData);
+                } catch (Exception e) {
+                }
             }
         } catch (Exception e) {
         }
@@ -333,16 +296,19 @@ public class MainActivity extends BasicActivity {
             JSONObject obj = new JSONObject(str);
             JSONArray rows = obj.getJSONObject("Grid_20150827000000000227_1").getJSONArray("row");
             for (int i = 0; i < rows.length(); i++) {
-                JSONObject jObject = rows.getJSONObject(i);
-                v_RECIPE_ID = jObject.getInt("RECIPE_ID");
-                v_IRDNT_NM = jObject.getString("IRDNT_NM");
-                v_IRDNT_CPCTY = jObject.getString("IRDNT_CPCTY");
-                v_IRDNT_TY_CODE = jObject.getInt("IRDNT_TY_CODE");
-                v_IRDNT_TY_NM = jObject.getString("IRDNT_TY_NM");
+                try {
+                    JSONObject jObject = rows.getJSONObject(i);
+                    v_RECIPE_ID = jObject.getInt("RECIPE_ID");
+                    v_IRDNT_NM = jObject.getString("IRDNT_NM");
+                    v_IRDNT_CPCTY = jObject.getString("IRDNT_CPCTY");
+                    v_IRDNT_TY_CODE = jObject.getInt("IRDNT_TY_CODE");
+                    v_IRDNT_TY_NM = jObject.getString("IRDNT_TY_NM");
 
-                //firebase에 data input
-                ingredientsData = new ingredientsData(v_RECIPE_ID, v_IRDNT_NM, v_IRDNT_CPCTY, v_IRDNT_TY_CODE, v_IRDNT_TY_NM);
-                recipeDBRef.child("recipe_ID").child(String.valueOf(v_RECIPE_ID)).child("IRDNT_LIST").child(String.valueOf(v_IRDNT_NM)).setValue(ingredientsData);
+                    //firebase에 data input
+                    ingredientsData = new ingredientsData(v_RECIPE_ID, v_IRDNT_NM, v_IRDNT_CPCTY, v_IRDNT_TY_CODE, v_IRDNT_TY_NM);
+                    recipeDBRef.child("recipe_ID").child(String.valueOf(v_RECIPE_ID)).child("IRDNT_LIST").child(String.valueOf(v_IRDNT_NM)).setValue(ingredientsData);
+                } catch (Exception e) {
+                }
             }
         } catch (Exception e) {
         }
@@ -354,16 +320,19 @@ public class MainActivity extends BasicActivity {
             JSONObject obj = new JSONObject(str);
             JSONArray rows = obj.getJSONObject("Grid_20150827000000000228_1").getJSONArray("row");
             for (int i = 0; i < rows.length(); i++) {
-                JSONObject jObject = rows.getJSONObject(i);
-                v_RECIPE_ID = jObject.getInt("RECIPE_ID");
-                v_COOKING_NO = jObject.getInt("COOKING_NO");
-                v_COOKING_DC = jObject.getString("COOKING_DC");
-                v_STRE_STEP_IMAGE_URL = jObject.getString("STRE_STEP_IMAGE_URL");
-                v_STEP_TIP = jObject.getString("STEP_TIP");
+                try {
+                    JSONObject jObject = rows.getJSONObject(i);
+                    v_RECIPE_ID = jObject.getInt("RECIPE_ID");
+                    v_COOKING_NO = jObject.getInt("COOKING_NO");
+                    v_COOKING_DC = jObject.getString("COOKING_DC");
+                    v_STRE_STEP_IMAGE_URL = jObject.getString("STRE_STEP_IMAGE_URL");
+                    v_STEP_TIP = jObject.getString("STEP_TIP");
 
-                //firebase에 data input
-                stepData = new stepData(v_RECIPE_ID, v_COOKING_NO, v_COOKING_DC, v_STRE_STEP_IMAGE_URL, v_STEP_TIP);
-                recipeDBRef.child("recipe_ID").child(String.valueOf(v_RECIPE_ID)).child("STEP").child(String.valueOf(v_COOKING_NO)).setValue(stepData);
+                    //firebase에 data input
+                    stepData = new stepData(v_RECIPE_ID, v_COOKING_NO, v_COOKING_DC, v_STRE_STEP_IMAGE_URL, v_STEP_TIP);
+                    recipeDBRef.child("recipe_ID").child(String.valueOf(v_RECIPE_ID)).child("STEP").child(String.valueOf(v_COOKING_NO)).setValue(stepData);
+                } catch (Exception e) {
+                }
             }
         } catch (Exception e) {
         }
@@ -467,7 +436,7 @@ public class MainActivity extends BasicActivity {
     }
 
     // 즐겨찾기 파일 불러오기
-    public void readKeepListFromFile() {
+    public void readKeepListFromFile(){
         try {
             FileInputStream fis = openFileInput("keepListFile.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -478,5 +447,4 @@ public class MainActivity extends BasicActivity {
             e.printStackTrace();
         }
     }
-
 }

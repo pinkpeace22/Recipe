@@ -3,9 +3,7 @@ package kr.ac.hs.recipe.ui.search;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
@@ -34,12 +31,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
-import kr.ac.hs.recipe.L;
 import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.activity.RecipeActivity;
 import kr.ac.hs.recipe.recipeDB.ingredientsData;
 import kr.ac.hs.recipe.recipeDB.recipeData;
-import timber.log.Timber;
 
 public class Search extends Fragment {
 
@@ -57,16 +52,13 @@ public class Search extends Fragment {
     Button[] tyBtnArr = new Button[17];
     String searchBtnText;
     int toggle = 0;
-    CheckBox keepBtn;
-
-    TextView textView;
 
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference recipeDBRef = myRef.child("recipeDB");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.search, container, false);
+        View v = inflater.inflate(R.layout.fragment_search, container, false);
         LayoutInflater inf = getLayoutInflater();
 
         searchText = v.findViewById(R.id.searchText);
@@ -336,5 +328,15 @@ public class Search extends Fragment {
         });
 
         return v;
+
     }
+
+/*    @Override
+    public void onResume() {
+        super.onResume();
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            ((BasicActivity) activity).setToolbarTitle("콕콕봐");
+        }
+    }*/
 }

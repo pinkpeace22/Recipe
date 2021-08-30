@@ -1,5 +1,6 @@
 package kr.ac.hs.recipe.fragment;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -29,6 +33,7 @@ public class KeepListFragment extends Fragment {
 
     ListView keeplistView;
     KeepListAdapter keepadapter;
+    LinearLayout keepLoading, keepLayout;
 
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference recipeDBRef = myRef.child("recipeDB");
@@ -37,10 +42,11 @@ public class KeepListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_keep_list, container, false);
         LayoutInflater inf = getLayoutInflater();
 
+        keepLoading = v.findViewById(R.id.keepLoading_layout);
+        keepLayout = v.findViewById(R.id.keeplist_layout);
         keepadapter = new KeepListAdapter();
         keeplistView = v.findViewById(R.id.keeplist);
         keeplistView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
-
 
         recipeDBRef.child("recipe_ID").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -51,11 +57,15 @@ public class KeepListFragment extends Fragment {
                         for (String item : CustomAdapter.keepList) {
                             if (String.valueOf(getResult.RECIPE_ID).equals(item)) { // 검색 내용이 포함된 메뉴만 반환
                                 keepadapter.addItem(getResult.IMG_URL, getResult.RECIPE_NM_KO, getResult.SUMRY, String.valueOf(getResult.RECIPE_ID));
+
                             }
                         }
                     } catch (Exception e) {
                     }
                 }
+                keepLoading.setVisibility(View.INVISIBLE);
+                keepLayout.setVisibility(View.VISIBLE);
+
                 keeplistView.setAdapter(keepadapter);
             }
 
