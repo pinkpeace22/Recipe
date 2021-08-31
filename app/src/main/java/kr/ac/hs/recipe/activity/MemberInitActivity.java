@@ -50,7 +50,7 @@ public class MemberInitActivity extends BasicActivity {
         setContentView(R.layout.activity_user_init);
         setToolbarTitle("회원정보");
 
-        loaderLayout = findViewById(R.id.loaderLyaout);
+        loaderLayout = findViewById(R.id.loaderLayout);
         profileImageVIew = findViewById(R.id.profileImageView);
         buttonBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
 

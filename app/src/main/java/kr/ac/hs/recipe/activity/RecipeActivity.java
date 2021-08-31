@@ -1,6 +1,10 @@
 package kr.ac.hs.recipe.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -39,6 +43,7 @@ import kr.ac.hs.recipe.fragment.TimerDialogFragment;
 import kr.ac.hs.recipe.recipeDB.SummaryData;
 import kr.ac.hs.recipe.recipeDB.ingredientsData;
 import kr.ac.hs.recipe.recipeDB.stepData;
+import kr.ac.hs.recipe.ui.search.CustomAdapter;
 import kr.ac.hs.recipe.ui.search.ListView;
 
 public class RecipeActivity extends BasicActivity {
@@ -273,10 +278,7 @@ public class RecipeActivity extends BasicActivity {
 
     private void onPlayMusic() {
         try {
-
             // 아래 설정된 mp3. 플레이
-
-
             mp3MediaManager.doPlayWithAsset("timer_sound.mp3");
         } catch (IOException e) {
             e.printStackTrace();
@@ -290,6 +292,29 @@ public class RecipeActivity extends BasicActivity {
         sec = sec % 60;
         min = min % 60;
         return String.format("%d:%d:%d", hour, min, sec);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.to_comment, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        ListView selected_item = Parcels.unwrap(getIntent().getParcelableExtra("EXTRA_SELECTED_ITEM"));
+        if (id == R.id.action_setComment) {
+            //Intent intent = new Intent(this, ShowCommentActivity.class);
+            Intent intent = new Intent(this, ShowCommentActivity.class);
+            intent.putExtra("selectedItem", selected_item.getName());
+            startActivity(intent);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

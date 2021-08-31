@@ -77,8 +77,16 @@ public class MainActivity extends BasicActivity {
         setToolbarTitle(getResources().getString(R.string.app_name));
         mContext = this;
 
-        Intent intent = new Intent(this, LoadingActivity.class); // 로딩 화면
-        startActivity(intent);
+        Thread startLoading = new startLoading();
+        Thread init = new init();
+        startLoading.start(); // 로딩 화면
+        try{
+            init.join(); // 회원가입
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         readKeepListFromFile(); // 즐겨찾기 파일 불러오기
 
         //myRef.removeValue(); // drop all DB
@@ -138,8 +146,6 @@ public class MainActivity extends BasicActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        init();
     }
 
     @Override
@@ -157,74 +163,50 @@ public class MainActivity extends BasicActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 1:
-                init();
+                Thread init = new init();
+                init.start();
                 break;
         }
     }
 
-    private void init(){
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser == null) {
-            myStartActivity(SignUpActivity.class);
-        } else {
-            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(firebaseUser.getUid());
-            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document != null) {
-                            if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            } else {
-                                Log.d(TAG, "No such document");
-                                myStartActivity(MemberInitActivity.class);
+    class init extends Thread{
+        public void run() {
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (firebaseUser == null) {
+                myStartActivity(SignUpActivity.class);
+            } else {
+                DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(firebaseUser.getUid());
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document != null) {
+                                if (document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                    myStartActivity(MemberInitActivity.class);
+                                }
                             }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
                         }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
                     }
-                }
-            });
-
-/*            HomeFragment homeFragment = new HomeFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, homeFragment)
-                    .commit();
-
-            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.home:
-                            HomeFragment homeFragment = new HomeFragment();
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.container, homeFragment)
-                                    .commit();
-                            return true;
-                        case R.id.myInfo:
-                            UserInfoFragment userInfoFragment = new UserInfoFragment();
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.container, userInfoFragment)
-                                    .commit();
-                            return true;
-                        case R.id.userList:
-                            UserListFragment userListFragment = new UserListFragment();
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.container, userListFragment)
-                                    .commit();
-                            return true;
-                    }
-                    return false;
-                }
-            });*/
+                });
+            }
         }
     }
 
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
         startActivityForResult(intent, 1);
+    }
+
+    class startLoading extends Thread {
+        public void run() {
+            myStartActivity(LoadingActivity.class);
+        }
     }
 
     // 데이터 update

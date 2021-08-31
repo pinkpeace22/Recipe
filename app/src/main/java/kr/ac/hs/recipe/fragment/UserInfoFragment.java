@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,9 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import kr.ac.hs.recipe.R;
-
 import com.bumptech.glide.Glide;
-import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +23,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserInfoFragment extends Fragment {
     private static final String TAG = "UserInfoFragment";
-    private Button signout;
 
     public UserInfoFragment() {
         // Required empty public constructor
@@ -35,19 +31,6 @@ public class UserInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_user_info);
-
-        signout = (Button) signout.findViewById(R.id.signout);
-        signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logOut();
-            }
-        });
-
-    }
-
-    private void setContentView(int fragment_user_info) {
     }
 
     @Override

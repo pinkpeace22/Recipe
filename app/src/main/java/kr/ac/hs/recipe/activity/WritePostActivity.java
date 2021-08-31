@@ -68,7 +68,7 @@ public class WritePostActivity extends BasicActivity {
 
         parent = findViewById(R.id.contentsLayout);
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
-        loaderLayout = findViewById(R.id.loaderLyaout);
+        loaderLayout = findViewById(R.id.loaderLayout);
         contentsEditText = findViewById(R.id.contentsEditText);
         titleEditText = findViewById(R.id.titleEditText);
 

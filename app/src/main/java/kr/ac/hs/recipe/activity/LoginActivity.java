@@ -51,7 +51,7 @@ public class LoginActivity extends BasicActivity {
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
 
         if (email.length() > 0 && password.length() > 0) {
-            final RelativeLayout loaderLayout = findViewById(R.id.loaderLyaout);
+            final RelativeLayout loaderLayout = findViewById(R.id.loaderLayout);
             loaderLayout.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

@@ -42,7 +42,7 @@ public class PasswordResetActivity extends BasicActivity {
     private void send() {
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
         if (email.length() > 0) {
-            final RelativeLayout loaderLayout = findViewById(R.id.loaderLyaout);
+            final RelativeLayout loaderLayout = findViewById(R.id.loaderLayout);
             loaderLayout.setVisibility(View.VISIBLE);
             mAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
