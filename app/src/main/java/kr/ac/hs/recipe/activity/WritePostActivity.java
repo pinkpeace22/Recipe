@@ -207,6 +207,10 @@ public class WritePostActivity extends BasicActivity {
 
     private void storageUpload() {
         final String title = ((EditText) findViewById(R.id.titleEditText)).getText().toString();
+
+        Intent intent = getIntent();
+        String selected_item_id = intent.getStringExtra("selectedId");
+        final String recipeId = selected_item_id;
         if (title.length() > 0) {
             loaderLayout.setVisibility(View.VISIBLE);
             final ArrayList<String> contentsList = new ArrayList<>();
@@ -258,7 +262,7 @@ public class WritePostActivity extends BasicActivity {
                                             successCount--;
                                             contentsList.set(index, uri.toString());
                                             if (successCount == 0) {
-                                                PostInfo postInfo = new PostInfo(title, contentsList, formatList, user.getUid(), date);
+                                                PostInfo postInfo = new PostInfo(title, contentsList, formatList, user.getUid(), date, recipeId);
                                                 storeUpload(documentReference, postInfo);
                                             }
                                         }
@@ -273,7 +277,7 @@ public class WritePostActivity extends BasicActivity {
                 }
             }
             if (successCount == 0) {
-                storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date));
+                storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date, recipeId));
             }
         } else {
             showToast(WritePostActivity.this, "제목을 입력해주세요.");

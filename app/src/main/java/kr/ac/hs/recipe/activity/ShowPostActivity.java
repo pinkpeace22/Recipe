@@ -1,12 +1,9 @@
 package kr.ac.hs.recipe.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,8 +17,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,9 +24,8 @@ import kr.ac.hs.recipe.PostInfo;
 import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.adapter.HomeAdapter;
 import kr.ac.hs.recipe.listener.OnPostListener;
-import kr.ac.hs.recipe.ui.search.ListView;
 
-public class ShowCommentActivity  extends BasicActivity {
+public class ShowPostActivity extends BasicActivity {
 
     private static final String TAG = "HomeFragment";
     private FirebaseFirestore firebaseFirestore;
@@ -40,14 +34,17 @@ public class ShowCommentActivity  extends BasicActivity {
     private boolean updating;
     private boolean topScrolled;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_show_comment);
-        setContentView(R.layout.fragment_home);
+        //setContentView(R.layout.activity_show_post);
+        setContentView(R.layout.fragment_post_list);
+
         Intent intent = getIntent();
         String selected_item = intent.getStringExtra("selectedItem");
-        setToolbarTitle("[후기] " + selected_item);
+
+        setToolbarTitle("【리뷰】" + selected_item);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         postList = new ArrayList<>();
@@ -110,14 +107,11 @@ public class ShowCommentActivity  extends BasicActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                /*
-                case R.id.logoutButton:
-                    FirebaseAuth.getInstance().signOut();
-                    myStartActivity(SignUpActivity.class);
-                    break;
-                */
                 case R.id.floatingActionButton:
-                    myStartActivity(WritePostActivity.class);
+                    Intent intent = new Intent(v.getContext(), WritePostActivity.class);
+                    intent.putExtra("selectedId", getIntent().getStringExtra("selectedId"));
+                    startActivity(intent);
+                    //myStartActivity(WritePostActivity.class);
                     break;
             }
         }
@@ -141,8 +135,9 @@ public class ShowCommentActivity  extends BasicActivity {
     private void postsUpdate(final boolean clear) {
         updating = true;
         Date date = postList.size() == 0 || clear ? new Date() : postList.get(postList.size() - 1).getCreatedAt();
+        String recipeId = getIntent().getStringExtra("selectedId");
         CollectionReference collectionReference = firebaseFirestore.collection("posts");
-        collectionReference.orderBy("createdAt", Query.Direction.DESCENDING).whereLessThan("createdAt", date).limit(10).get()
+        collectionReference.whereEqualTo("recipeId", recipeId).orderBy("createdAt", Query.Direction.DESCENDING).whereLessThan("createdAt", date).limit(10).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -158,7 +153,7 @@ public class ShowCommentActivity  extends BasicActivity {
                                         (ArrayList<String>) document.getData().get("formats"),
                                         document.getData().get("publisher").toString(),
                                         new Date(document.getDate("createdAt").getTime()),
-                                        document.getId()));
+                                        document.getId(), document.getData().get("recipeId").toString()));
                             }
                             homeAdapter.notifyDataSetChanged();
                         } else {

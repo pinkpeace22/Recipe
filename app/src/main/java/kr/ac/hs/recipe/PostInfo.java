@@ -13,22 +13,25 @@ public class PostInfo implements Serializable {
     private String publisher;
     private Date createdAt;
     private String id;
+    private String recipeId; // 레시피 아이디
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id){
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id, String recipeId){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
         this.publisher = publisher;
         this.createdAt = createdAt;
         this.id = id;
+        this.recipeId = recipeId;
     }
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt){
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String recipeId){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
         this.publisher = publisher;
         this.createdAt = createdAt;
+        this.recipeId = recipeId;
     }
 
     public Map<String, Object> getPostInfo(){
@@ -38,6 +41,7 @@ public class PostInfo implements Serializable {
         docData.put("formats",formats);
         docData.put("publisher",publisher);
         docData.put("createdAt",createdAt);
+        docData.put("recipeId",recipeId);
         return  docData;
     }
 
@@ -76,5 +80,11 @@ public class PostInfo implements Serializable {
     }
     public void setId(String id){
         this.id = id;
+    }
+    public String getRecipeId() {
+        return recipeId;
+    }
+    public void setRecipeId(String recipeId) {
+        this.recipeId = recipeId;
     }
 }

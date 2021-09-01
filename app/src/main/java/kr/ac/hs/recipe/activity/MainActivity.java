@@ -70,6 +70,9 @@ public class MainActivity extends BasicActivity {
 
     LocalDate now = LocalDate.now();
 
+    Thread startLoading = new startLoading();
+    Thread init = new init();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,17 +80,24 @@ public class MainActivity extends BasicActivity {
         setToolbarTitle(getResources().getString(R.string.app_name));
         mContext = this;
 
-        Thread startLoading = new startLoading();
-        Thread init = new init();
-        startLoading.start(); // 로딩 화면
+
+/*        startLoading.start(); // 로딩 화면
         try{
-            init.join(); // 회원가입
+            startLoading.join();
         }
         catch (InterruptedException e) {
             e.printStackTrace();
         }
+        init.start(); // 회원가입*/
 
-        readKeepListFromFile(); // 즐겨찾기 파일 불러오기
+        startLoading.start();
+        try{
+            init.join();
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
 
         //myRef.removeValue(); // drop all DB
         //updateData();
@@ -135,6 +145,8 @@ public class MainActivity extends BasicActivity {
                 }
             });
         }
+
+        readKeepListFromFile(); // 즐겨찾기 파일 불러오기
 
         // Navigation 구성
         BottomNavigationView navView = findViewById(R.id.nav_view);

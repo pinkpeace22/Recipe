@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import kr.ac.hs.recipe.R;
@@ -39,7 +38,6 @@ public class UserInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -50,7 +48,6 @@ public class UserInfoFragment extends Fragment {
         final ImageView profileImageView = view.findViewById(R.id.profileImageView);
         final TextView nameTextView = view.findViewById(R.id.nameTextView);
         logout = view.findViewById(R.id.logout);
-
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

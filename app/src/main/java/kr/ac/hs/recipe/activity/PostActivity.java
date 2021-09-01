@@ -24,7 +24,7 @@ public class PostActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_post);
-        setContentView(R.layout.activity_show_comment);
+        setContentView(R.layout.activity_show_post);
 
         postInfo = (PostInfo) getIntent().getSerializableExtra("postInfo");
         contentsLayout = findViewById(R.id.contentsLayout);

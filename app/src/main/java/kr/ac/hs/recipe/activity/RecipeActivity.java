@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.epoxy.EpoxyAsyncUtil;
 import com.airbnb.epoxy.EpoxyRecyclerView;
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +33,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
 import kr.ac.hs.recipe.L;
 import kr.ac.hs.recipe.MediaManager;
 import kr.ac.hs.recipe.R;
@@ -43,7 +41,6 @@ import kr.ac.hs.recipe.fragment.TimerDialogFragment;
 import kr.ac.hs.recipe.recipeDB.SummaryData;
 import kr.ac.hs.recipe.recipeDB.ingredientsData;
 import kr.ac.hs.recipe.recipeDB.stepData;
-import kr.ac.hs.recipe.ui.search.CustomAdapter;
 import kr.ac.hs.recipe.ui.search.ListView;
 
 public class RecipeActivity extends BasicActivity {
@@ -307,9 +304,9 @@ public class RecipeActivity extends BasicActivity {
         int id = item.getItemId();
         ListView selected_item = Parcels.unwrap(getIntent().getParcelableExtra("EXTRA_SELECTED_ITEM"));
         if (id == R.id.action_setComment) {
-            //Intent intent = new Intent(this, ShowCommentActivity.class);
-            Intent intent = new Intent(this, ShowCommentActivity.class);
+            Intent intent = new Intent(this, ShowPostActivity.class);
             intent.putExtra("selectedItem", selected_item.getName());
+            intent.putExtra("selectedId", selected_item.getSeq());
             startActivity(intent);
 
             return true;

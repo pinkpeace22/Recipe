@@ -70,7 +70,7 @@
         <activity android:name=".activity.PostActivity">
         </activity>
         <activity android:name=".activity.RecipeActivity" />
-        <activity android:name=".activity.ShowCommentActivity"/>
+        <activity android:name=".activity.ShowPostActivity"/>
 
         <!--facebook ID -->
         <meta-data
