@@ -32,6 +32,7 @@ public class PasswordResetActivity extends BasicActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+
                 case R.id.sendButton:
                     send();
                     break;

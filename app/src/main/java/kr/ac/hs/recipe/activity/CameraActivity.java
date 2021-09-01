@@ -70,7 +70,6 @@ public class CameraActivity extends BasicActivity {
             Intent intent = new Intent();
             intent.putExtra(INTENT_PATH, mFile.toString());
             setResult(Activity.RESULT_OK, intent);
-
             camera2BasicFragment.closeCamera();
             finish();
         }

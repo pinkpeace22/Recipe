@@ -198,7 +198,7 @@ public class MainActivity extends BasicActivity {
         }
     }
 
-    private void myStartActivity(Class c) {
+    public void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
         startActivityForResult(intent, 1);
     }
