@@ -164,11 +164,8 @@ public class UserListFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 userList.add(new UserInfo(
-                                        document.getData().get("name").toString(),
-                                        document.getData().get("phoneNumber").toString(),
-                                        document.getData().get("birthDay").toString(),
-                                        document.getData().get("address").toString(),
-                                        document.getData().get("photoUrl") == null ? null : document.getData().get("photoUrl").toString()));
+                                        document.getData().get("name").toString()
+                                ));
                             }
                             userListAdapter.notifyDataSetChanged();
                         } else {

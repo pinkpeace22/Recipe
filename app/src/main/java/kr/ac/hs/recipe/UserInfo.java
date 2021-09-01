@@ -15,7 +15,7 @@ public class UserInfo {
         this.photoUrl = photoUrl;
     }
 
-    public UserInfo(String name, String phoneNumber, String birthDay, String address){
+    public UserInfo(String name){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birthDay = birthDay;
