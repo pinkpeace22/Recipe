@@ -50,10 +50,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:textSize="28dp" />
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/signout"
                 android:layout_width="wrap_content"

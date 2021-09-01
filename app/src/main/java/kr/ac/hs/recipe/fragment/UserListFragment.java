@@ -21,6 +21,7 @@ import kr.ac.hs.recipe.adapter.UserListAdapter;
 import kr.ac.hs.recipe.listener.OnPostListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -121,12 +122,7 @@ public class UserListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                /*
-                case R.id.logoutButton:
-                    FirebaseAuth.getInstance().signOut();
-                    myStartActivity(SignUpActivity.class);
-                    break;
-                */
+
                 case R.id.floatingActionButton:
                     myStartActivity(WritePostActivity.class);
                     break;

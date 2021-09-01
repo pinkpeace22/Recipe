@@ -29,11 +29,13 @@
         <!-- 로딩 화면 -->
         <activity
             android:name=".activity.LoadingActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        </activity>
 
         <!-- 로그인 -->
         <activity
-            android:name=".activity.MainActivity">
+            android:name=".activity.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -50,33 +52,23 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.LoginActivity">
-
         </activity>
         <activity android:name=".activity.SignUpActivity">
-
         </activity>
         <activity android:name=".activity.PasswordResetActivity">
-
         </activity>
         <activity android:name=".activity.MemberInitActivity">
-
         </activity>
         <activity android:name=".activity.CameraActivity">
-
         </activity>
         <activity android:name=".activity.GalleryActivity">
-
         </activity>
         <activity android:name=".activity.BasicActivity">
-
         </activity>
         <activity android:name=".activity.WritePostActivity">
-
         </activity>
         <activity android:name=".activity.PostActivity">
-
         </activity>
-
         <activity android:name=".activity.RecipeActivity" />
         <activity android:name=".activity.ShowCommentActivity"/>
 
