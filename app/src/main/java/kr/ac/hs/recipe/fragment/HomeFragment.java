@@ -125,12 +125,7 @@ public class HomeFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                /*
-                case R.id.logoutButton:
-                    FirebaseAuth.getInstance().signOut();
-                    myStartActivity(SignUpActivity.class);
-                    break;
-                */
+
                 case R.id.floatingActionButton:
                     myStartActivity(WritePostActivity.class);
                     break;

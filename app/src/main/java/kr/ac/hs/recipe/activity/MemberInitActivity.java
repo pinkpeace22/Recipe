@@ -6,9 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -50,6 +52,7 @@ public class MemberInitActivity extends BasicActivity {
         setContentView(R.layout.activity_user_init);
         setToolbarTitle("회원정보");
 
+
         loaderLayout = findViewById(R.id.loaderLayout);
         profileImageVIew = findViewById(R.id.profileImageView);
         buttonBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
@@ -60,6 +63,7 @@ public class MemberInitActivity extends BasicActivity {
         findViewById(R.id.checkButton).setOnClickListener(onClickListener);
         findViewById(R.id.picture).setOnClickListener(onClickListener);
         findViewById(R.id.gallery).setOnClickListener(onClickListener);
+
 
     }
 
