@@ -50,37 +50,19 @@
                         android:src="@android:drawable/sym_def_app_icon" />
                 </androidx.cardview.widget.CardView>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="앱 안에서 사용할 닉네임을 정해주세요:)"/>
+
                 <EditText
                     android:id="@+id/nameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="이름"
+                    android:hint="닉네임"
                     android:inputType="textPersonName" />
-
-                <EditText
-                    android:id="@+id/phoneNumberEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="전화번호"
-                    android:inputType="phone" />
-
-                <EditText
-                    android:id="@+id/birthDayEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="생년월일"
-                    android:inputType="date" />
-
-                <EditText
-                    android:id="@+id/addressEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="주소"
-                    android:inputType="textPostalAddress" />
 
                 <Button
                     android:id="@+id/checkButton"

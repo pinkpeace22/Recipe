@@ -57,6 +57,7 @@
         <activity android:name=".activity.BasicActivity"></activity>
         <activity android:name=".activity.WritePostActivity"></activity>
         <activity android:name=".activity.PostActivity"></activity>
+
         <activity android:name=".activity.RecipeActivity" />
         <activity android:name=".activity.ShowCommentActivity"/>
 

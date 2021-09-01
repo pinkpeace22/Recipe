@@ -40,9 +40,6 @@ public class UserInfoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_info, container, false);
         final ImageView profileImageView = view.findViewById(R.id.profileImageView);
         final TextView nameTextView = view.findViewById(R.id.nameTextView);
-        final TextView phoneNumberTextView = view.findViewById(R.id.phoneNumberTextView);
-        final TextView birthDayTextView = view.findViewById(R.id.birthDayTextView);
-        final TextView addressTextView = view.findViewById(R.id.addressTextView);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -57,9 +54,6 @@ public class UserInfoFragment extends Fragment {
                                 Glide.with(getActivity()).load(document.getData().get("photoUrl")).centerCrop().override(500).into(profileImageView);
                             }
                             nameTextView.setText(document.getData().get("name").toString());
-                            phoneNumberTextView.setText(document.getData().get("phoneNumber").toString());
-                            birthDayTextView.setText(document.getData().get("birthDay").toString());
-                            addressTextView.setText(document.getData().get("address").toString());
                         } else {
                             Log.d(TAG, "No such document");
                         }
