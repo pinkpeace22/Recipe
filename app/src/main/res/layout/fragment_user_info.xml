@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="15dp">
 
             <TextView
                 android:id="@+id/textView"
@@ -54,18 +54,26 @@
                     android:id="@+id/nameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_marginTop="30dp"
                     android:gravity="center"
                     android:textSize="28dp" />
 
             </LinearLayout>
 
             <Button
+                android:id="@+id/myComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="내가 작성한 리뷰 보기" />
+
+            <Button
                 android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="로그아웃"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:text="로그아웃" />
         </LinearLayout>
     </ScrollView>
 

@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,6 +19,8 @@ import androidx.fragment.app.Fragment;
 
 import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.activity.MainActivity;
+import kr.ac.hs.recipe.activity.MyPostActivity;
+import kr.ac.hs.recipe.activity.ShowPostActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserInfoFragment extends Fragment {
     private static final String TAG = "UserInfoFragment";
-    Button logout;
+    Button logout, myComment;
     FirebaseAuth firebaseAuth;
 
     public UserInfoFragment() {
@@ -48,6 +52,7 @@ public class UserInfoFragment extends Fragment {
         final ImageView profileImageView = view.findViewById(R.id.profileImageView);
         final TextView nameTextView = view.findViewById(R.id.nameTextView);
         logout = view.findViewById(R.id.logout);
+        myComment = view.findViewById(R.id.myComment);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -82,6 +87,14 @@ public class UserInfoFragment extends Fragment {
             }
         });
 
+        myComment.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) MainActivity.mContext).myStartActivity(MyPostActivity.class);
+            }
+        });
+
         return view;
     }
 
@@ -99,5 +112,6 @@ public class UserInfoFragment extends Fragment {
     public void onPause(){
         super.onPause();
     }
+
 
 }
