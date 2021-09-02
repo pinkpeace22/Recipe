@@ -27,7 +27,7 @@ import kr.ac.hs.recipe.listener.OnPostListener;
 
 public class ShowPostActivity extends BasicActivity {
 
-    private static final String TAG = "HomeFragment";
+    private static final String TAG = "ShowPostActivity";
     private FirebaseFirestore firebaseFirestore;
     private HomeAdapter homeAdapter;
     private ArrayList<PostInfo> postList;
@@ -38,8 +38,7 @@ public class ShowPostActivity extends BasicActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_show_post);
-        setContentView(R.layout.fragment_post_list);
+        setContentView(R.layout.activity_post_list);
 
         Intent intent = getIntent();
         String selected_item = intent.getStringExtra("selectedItem");
