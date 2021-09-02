@@ -59,6 +59,7 @@ public class WritePostActivity extends BasicActivity {
     private EditText titleEditText;
     private PostInfo postInfo;
     private int pathCount, successCount;
+    private String selected_item_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,8 +209,10 @@ public class WritePostActivity extends BasicActivity {
     private void storageUpload() {
         final String title = ((EditText) findViewById(R.id.titleEditText)).getText().toString();
 
-        Intent intent = getIntent();
-        String selected_item_id = intent.getStringExtra("selectedId");
+        if(selected_item_id.isEmpty()) {
+            Intent intent = getIntent();
+            selected_item_id = intent.getStringExtra("selectedId");
+        }
         final String recipeId = selected_item_id;
         if (title.length() > 0) {
             loaderLayout.setVisibility(View.VISIBLE);
@@ -310,6 +313,7 @@ public class WritePostActivity extends BasicActivity {
         if (postInfo != null) {
             titleEditText.setText(postInfo.getTitle());
             ArrayList<String> contentsList = postInfo.getContents();
+            selected_item_id = postInfo.getRecipeId();
             for (int i = 0; i < contentsList.size(); i++) {
                 String contents = contentsList.get(i);
                 if (isStorageUrl(contents)) {

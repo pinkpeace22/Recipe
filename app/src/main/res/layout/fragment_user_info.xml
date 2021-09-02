@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <include
+        layout="@layout/view_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
