@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
@@ -327,16 +328,25 @@ public class Search extends Fragment {
             }
         });
 
+        // 뒤로가기 버튼 제어
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (searchList.getVisibility() == View.VISIBLE) {
+                    // Handle back press
+                    classification.setVisibility(View.VISIBLE);
+                    searchList.setVisibility(View.INVISIBLE);
+                    searchText.getText().clear();
+                    searchText.clearFocus();
+                } else {
+                    // If you want to get default implementation of onBackPressed, use this
+                    this.remove();
+                    requireActivity().onBackPressed();
+                }
+            }
+        });
+
         return v;
 
     }
-
-/*    @Override
-    public void onResume() {
-        super.onResume();
-        FragmentActivity activity = getActivity();
-        if (activity != null) {
-            ((BasicActivity) activity).setToolbarTitle("콕콕봐");
-        }
-    }*/
 }
