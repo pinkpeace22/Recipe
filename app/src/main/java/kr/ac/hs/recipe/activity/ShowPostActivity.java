@@ -3,13 +3,9 @@ package kr.ac.hs.recipe.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,8 +19,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,8 +26,6 @@ import kr.ac.hs.recipe.PostInfo;
 import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.adapter.HomeAdapter;
 import kr.ac.hs.recipe.listener.OnPostListener;
-
-import static kr.ac.hs.recipe.Util.showToast;
 
 public class ShowPostActivity extends BasicActivity {
 
@@ -116,13 +108,10 @@ public class ShowPostActivity extends BasicActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.floatingActionButton:
-                    Intent intent = new Intent(v.getContext(), WritePostActivity.class);
-                    intent.putExtra("selectedId", getIntent().getStringExtra("selectedId"));
-                    startActivity(intent);
-                    //myStartActivity(WritePostActivity.class);
-                    break;
+            if (v.getId() == R.id.floatingActionButton) {
+                Intent intent = new Intent(v.getContext(), WritePostActivity.class);
+                intent.putExtra("selectedId", getIntent().getStringExtra("selectedId"));
+                startActivity(intent);
             }
         }
     };
@@ -160,12 +149,10 @@ public class ShowPostActivity extends BasicActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
 
+
+                                //후기 작성자가 본인이 아닐 경우 > 수정 / 삭제 menu 없애기
                                 String username = document.getData().get("publisher").toString();
-                                if (!username.equals(user.getUid())) {
-                                    //Log.d(TAG, document.getData().get("title").toString() + " 일치하지않습니다.");
-                                    //후기 작성자가 본인이 아닐 경우 > 수정 / 삭제 menu 없애기
-                                    showBtn = false;
-                                } else showBtn = true;
+                                showBtn = username.equals(user.getUid());
 
                                 postList.add(new PostInfo(
                                         document.getData().get("title").toString(),
@@ -183,11 +170,5 @@ public class ShowPostActivity extends BasicActivity {
                         updating = false;
                     }
                 });
-    }
-
-
-    private void myStartActivity(Class c) {
-        Intent intent = new Intent(this, c);
-        startActivityForResult(intent, 0);
     }
 }
