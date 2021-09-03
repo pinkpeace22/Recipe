@@ -3,19 +3,27 @@ package kr.ac.hs.recipe.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +33,8 @@ import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.adapter.HomeAdapter;
 import kr.ac.hs.recipe.listener.OnPostListener;
 
+import static kr.ac.hs.recipe.Util.showToast;
+
 public class ShowPostActivity extends BasicActivity {
 
     private static final String TAG = "ShowPostActivity";
@@ -33,7 +43,8 @@ public class ShowPostActivity extends BasicActivity {
     private ArrayList<PostInfo> postList;
     private boolean updating;
     private boolean topScrolled;
-
+    FirebaseUser user;
+    public static boolean showBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +54,7 @@ public class ShowPostActivity extends BasicActivity {
         Intent intent = getIntent();
         String selected_item = intent.getStringExtra("selectedItem");
 
-        setToolbarTitle("【리뷰】" + selected_item);
+        setToolbarTitle("【리뷰】 " + selected_item);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         postList = new ArrayList<>();
@@ -132,8 +143,10 @@ public class ShowPostActivity extends BasicActivity {
     };
 
     private void postsUpdate(final boolean clear) {
+        showBtn = true;
         updating = true;
         Date date = postList.size() == 0 || clear ? new Date() : postList.get(postList.size() - 1).getCreatedAt();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         String recipeId = getIntent().getStringExtra("selectedId");
         CollectionReference collectionReference = firebaseFirestore.collection("posts");
         collectionReference.whereEqualTo("recipeId", recipeId).orderBy("createdAt", Query.Direction.DESCENDING).whereLessThan("createdAt", date).limit(10).get()
@@ -146,14 +159,23 @@ public class ShowPostActivity extends BasicActivity {
                             }
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                String username = document.getData().get("publisher").toString();
+                                if (!username.equals(user.getUid())) {
+                                    //Log.d(TAG, document.getData().get("title").toString() + " 일치하지않습니다.");
+                                    //후기 작성자가 본인이 아닐 경우 > 수정 / 삭제 menu 없애기
+                                    showBtn = false;
+                                } else showBtn = true;
+
                                 postList.add(new PostInfo(
                                         document.getData().get("title").toString(),
                                         (ArrayList<String>) document.getData().get("contents"),
                                         (ArrayList<String>) document.getData().get("formats"),
                                         document.getData().get("publisher").toString(),
                                         new Date(document.getDate("createdAt").getTime()),
-                                        document.getId(), document.getData().get("recipeId").toString()));
+                                        document.getId(), document.getData().get("recipeId").toString(), showBtn));
                             }
+
                             homeAdapter.notifyDataSetChanged();
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

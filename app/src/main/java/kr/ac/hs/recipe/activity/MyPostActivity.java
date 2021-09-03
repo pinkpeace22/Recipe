@@ -36,6 +36,7 @@ public class MyPostActivity extends BasicActivity {
     private boolean updating;
     private boolean topScrolled;
     FirebaseUser user;
+    public static boolean showBtn = true;
 
 
     @Override
@@ -139,7 +140,7 @@ public class MyPostActivity extends BasicActivity {
                                         (ArrayList<String>) document.getData().get("contents"),
                                         (ArrayList<String>) document.getData().get("formats"),
                                         document.getData().get("publisher").toString(),
-                                        new Date(document.getDate("createdAt").getTime())));
+                                        new Date(document.getDate("createdAt").getTime()), showBtn));
                             }
                             homeAdapter.notifyDataSetChanged();
                         } else {

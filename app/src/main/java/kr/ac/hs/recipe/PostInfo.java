@@ -14,8 +14,9 @@ public class PostInfo implements Serializable {
     private Date createdAt;
     private String id;
     private String recipeId; // 레시피 아이디
+    private boolean mine;
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id, String recipeId){
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id, String recipeId, boolean mine){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
@@ -23,6 +24,7 @@ public class PostInfo implements Serializable {
         this.createdAt = createdAt;
         this.id = id;
         this.recipeId = recipeId;
+        this.mine = mine;
     }
 
     public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String recipeId){
@@ -34,14 +36,14 @@ public class PostInfo implements Serializable {
         this.recipeId = recipeId;
     }
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt){
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, boolean mine){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
         this.publisher = publisher;
         this.createdAt = createdAt;
+        this.mine = mine;
     }
-
 
     public Map<String, Object> getPostInfo(){
         Map<String, Object> docData = new HashMap<>();
@@ -95,5 +97,11 @@ public class PostInfo implements Serializable {
     }
     public void setRecipeId(String recipeId) {
         this.recipeId = recipeId;
+    }
+    public boolean isMine() {
+        return mine;
+    }
+    public void setMine(boolean mine) {
+        this.mine = mine;
     }
 }

@@ -15,7 +15,7 @@ import kr.ac.hs.recipe.listener.OnPostListener;
 import kr.ac.hs.recipe.view.ReadContentsVIew;
 
 public class PostActivity extends BasicActivity {
-    private PostInfo postInfo;
+    public static PostInfo postInfo;
     private FirebaseHelper firebaseHelper;
     private ReadContentsVIew readContentsVIew;
     private LinearLayout contentsLayout;

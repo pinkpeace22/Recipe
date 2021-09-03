@@ -19,6 +19,7 @@ import kr.ac.hs.recipe.FirebaseHelper;
 import kr.ac.hs.recipe.PostInfo;
 import kr.ac.hs.recipe.R;
 import kr.ac.hs.recipe.activity.PostActivity;
+import kr.ac.hs.recipe.activity.ShowPostActivity;
 import kr.ac.hs.recipe.activity.WritePostActivity;
 import kr.ac.hs.recipe.listener.OnPostListener;
 import kr.ac.hs.recipe.view.ReadContentsVIew;
@@ -32,6 +33,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
     private FirebaseHelper firebaseHelper;
     private ArrayList<ArrayList<SimpleExoPlayer>> playerArrayListArrayList = new ArrayList<>();
     private final int MORE_INDEX = 2;
+    int count = 0;
 
     static class MainViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -62,6 +64,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
         final MainViewHolder mainViewHolder = new MainViewHolder(cardView);
+
+        if(mDataset.get(count).isMine() == false){
+            cardView.findViewById(R.id.menu).setVisibility(View.INVISIBLE);
+        }
+
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +84,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
                 showPopup(v, mainViewHolder.getAdapterPosition());
             }
         });
+
+        count++;
 
         return mainViewHolder;
     }
