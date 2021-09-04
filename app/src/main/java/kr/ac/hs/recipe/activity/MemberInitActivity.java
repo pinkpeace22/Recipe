@@ -119,7 +119,7 @@ public class MemberInitActivity extends BasicActivity {
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference();
             user = FirebaseAuth.getInstance().getCurrentUser();
-            final StorageReference mountainImagesRef = storageRef.child("users/" + user.getUid() + "/profileImage.jpg");
+            final StorageReference profileImagesRef = storageRef.child("users/" + user.getUid() + "/profileImage.jpg");
 
             if (profilePath == null) {
                 UserInfo userInfo = new UserInfo(name);
@@ -127,14 +127,14 @@ public class MemberInitActivity extends BasicActivity {
             } else {
                 try {
                     InputStream stream = new FileInputStream(new File(profilePath));
-                    UploadTask uploadTask = mountainImagesRef.putStream(stream);
+                    UploadTask uploadTask = profileImagesRef.putStream(stream);
                     uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                             if (!task.isSuccessful()) {
                                 throw task.getException();
                             }
-                            return mountainImagesRef.getDownloadUrl();
+                            return profileImagesRef.getDownloadUrl();
                         }
                     }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
@@ -142,8 +142,14 @@ public class MemberInitActivity extends BasicActivity {
                             if (task.isSuccessful()) {
                                 Uri downloadUri = task.getResult();
 
-                                UserInfo userInfo = new UserInfo(name);
+                                UserInfo userInfo;
+                                if (downloadUri == null) {
+                                    userInfo = new UserInfo(name);
+                                } else {
+                                    userInfo = new UserInfo(name, downloadUri.toString());
+                                }
                                 storeUploader(userInfo);
+
                             } else {
                                 showToast(MemberInitActivity.this, "회원정보를 보내는데 실패하였습니다.");
                             }

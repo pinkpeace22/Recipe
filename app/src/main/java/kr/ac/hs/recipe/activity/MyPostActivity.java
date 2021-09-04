@@ -135,12 +135,19 @@ public class MyPostActivity extends BasicActivity {
                             }
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                postList.add(new PostInfo(
-                                        document.getData().get("title").toString(),
+
+                                String profileImg;
+                                if(document.getData().get("profileImg") == null) {
+                                    profileImg = null;
+                                } else profileImg = document.getData().get("profileImg").toString();
+
+                                postList.add(new PostInfo(profileImg,
+                                        document.getData().get("profileName").toString(),
                                         (ArrayList<String>) document.getData().get("contents"),
                                         (ArrayList<String>) document.getData().get("formats"),
                                         document.getData().get("publisher").toString(),
-                                        new Date(document.getDate("createdAt").getTime()), showBtn));
+                                        new Date(document.getDate("createdAt").getTime()),
+                                        document.getId(), document.getData().get("recipeId").toString(), showBtn));
                             }
                             homeAdapter.notifyDataSetChanged();
                         } else {

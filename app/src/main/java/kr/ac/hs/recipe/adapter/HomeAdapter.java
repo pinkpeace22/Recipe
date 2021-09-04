@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,12 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import kr.ac.hs.recipe.FirebaseHelper;
 import kr.ac.hs.recipe.PostInfo;
 import kr.ac.hs.recipe.R;
-import kr.ac.hs.recipe.activity.PostActivity;
-import kr.ac.hs.recipe.activity.ShowPostActivity;
 import kr.ac.hs.recipe.activity.WritePostActivity;
 import kr.ac.hs.recipe.listener.OnPostListener;
 import kr.ac.hs.recipe.view.ReadContentsVIew;
+
+import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -69,15 +72,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
             cardView.findViewById(R.id.menu).setVisibility(View.INVISIBLE);
         }
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, PostActivity.class);
-                intent.putExtra("postInfo", mDataset.get(mainViewHolder.getAdapterPosition()));
-                activity.startActivity(intent);
-            }
-        });
-
         cardView.findViewById(R.id.menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,10 +87,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
     @Override
     public void onBindViewHolder(@NonNull final MainViewHolder holder, int position) {
         CardView cardView = holder.cardView;
-        TextView titleTextView = cardView.findViewById(R.id.titleTextView);
+        TextView nameTextView = cardView.findViewById(R.id.nameTextView);
+        ImageView profileImgView = cardView.findViewById(R.id.profileImgView);
 
         PostInfo postInfo = mDataset.get(position);
-        titleTextView.setText(postInfo.getTitle());
+        if(mDataset.get(position).getProfileImg() != null){
+            Glide.with(activity).load(mDataset.get(position).getProfileImg()).centerCrop().override(500).into(profileImgView);
+        }
+        nameTextView.setText(postInfo.getProfileName());
 
         ReadContentsVIew readContentsVIew = cardView.findViewById(R.id.readContentsView);
         LinearLayout contentsLayout = cardView.findViewById(R.id.contentsLayout);

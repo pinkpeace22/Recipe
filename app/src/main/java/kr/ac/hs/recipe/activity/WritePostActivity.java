@@ -15,13 +15,18 @@ import androidx.annotation.NonNull;
 
 import kr.ac.hs.recipe.PostInfo;
 import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.fragment.UserInfoFragment;
 import kr.ac.hs.recipe.view.ContentsItemView;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
@@ -48,6 +53,7 @@ import static kr.ac.hs.recipe.Util.storageUrlToName;
 public class WritePostActivity extends BasicActivity {
     private static final String TAG = "WritePostActivity";
     private FirebaseUser user;
+    private FirebaseFirestore firebaseFirestore;
     private StorageReference storageRef;
     private ArrayList<String> pathList = new ArrayList<>();
     private LinearLayout parent;
@@ -56,10 +62,12 @@ public class WritePostActivity extends BasicActivity {
     private ImageView selectedImageVIew;
     private EditText selectedEditText;
     private EditText contentsEditText;
-    private EditText titleEditText;
+    private EditText nameEditText;
     private PostInfo postInfo;
     private int pathCount, successCount;
     private String selected_item_id = "";
+    private String profileName, profileImg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,6 @@ public class WritePostActivity extends BasicActivity {
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
         loaderLayout = findViewById(R.id.loaderLayout);
         contentsEditText = findViewById(R.id.contentsEditText);
-        titleEditText = findViewById(R.id.titleEditText);
 
         findViewById(R.id.check).setOnClickListener(onClickListener);
         findViewById(R.id.image).setOnClickListener(onClickListener);
@@ -82,14 +89,6 @@ public class WritePostActivity extends BasicActivity {
 
         buttonsBackgroundLayout.setOnClickListener(onClickListener);
         contentsEditText.setOnFocusChangeListener(onFocusChangeListener);
-        titleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    selectedEditText = null;
-                }
-            }
-        });
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
@@ -207,84 +206,107 @@ public class WritePostActivity extends BasicActivity {
     };
 
     private void storageUpload() {
-        final String title = ((EditText) findViewById(R.id.titleEditText)).getText().toString();
 
         if(selected_item_id.isEmpty()) {
             Intent intent = getIntent();
             selected_item_id = intent.getStringExtra("selectedId");
         }
         final String recipeId = selected_item_id;
-        if (title.length() > 0) {
-            loaderLayout.setVisibility(View.VISIBLE);
-            final ArrayList<String> contentsList = new ArrayList<>();
-            final ArrayList<String> formatList = new ArrayList<>();
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference();
-            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-            final DocumentReference documentReference = postInfo == null ? firebaseFirestore.collection("posts").document() : firebaseFirestore.collection("posts").document(postInfo.getId());
-            final Date date = postInfo == null ? new Date() : postInfo.getCreatedAt();
-            for (int i = 0; i < parent.getChildCount(); i++) {
-                LinearLayout linearLayout = (LinearLayout) parent.getChildAt(i);
-                for (int ii = 0; ii < linearLayout.getChildCount(); ii++) {
-                    View view = linearLayout.getChildAt(ii);
-                    if (view instanceof EditText) {
-                        String text = ((EditText) view).getText().toString();
-                        if (text.length() > 0) {
-                            contentsList.add(text);
-                            formatList.add("text");
-                        }
-                    } else if (!isStorageUrl(pathList.get(pathCount))) {
-                        String path = pathList.get(pathCount);
-                        successCount++;
-                        contentsList.add(path);
-                        if(isImageFile(path)){
-                            formatList.add("image");
-                        }else if (isVideoFile(path)){
-                            formatList.add("video");
-                        }else{
-                            formatList.add("text");
-                        }
-                        String[] pathArray = path.split("\\.");
-                        final StorageReference mountainImagesRef = storageRef.child("posts/" + documentReference.getId() + "/" + pathCount + "." + pathArray[pathArray.length - 1]);
-                        try {
-                            InputStream stream = new FileInputStream(new File(pathList.get(pathCount)));
-                            StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata("index", "" + (contentsList.size() - 1)).build();
-                            UploadTask uploadTask = mountainImagesRef.putStream(stream, metadata);
-                            uploadTask.addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception exception) {
-                                }
-                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    final int index = Integer.parseInt(taskSnapshot.getMetadata().getCustomMetadata("index"));
-                                    mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            successCount--;
-                                            contentsList.set(index, uri.toString());
-                                            if (successCount == 0) {
-                                                PostInfo postInfo = new PostInfo(title, contentsList, formatList, user.getUid(), date, recipeId);
-                                                storeUpload(documentReference, postInfo);
-                                            }
+
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        if (document.exists()) {
+                            profileName = document.getData().get("name").toString();
+
+                            if(document.getData().get("photoUrl") != null){
+                                profileImg = document.getData().get("photoUrl").toString();
+                            } else profileImg = null;
+
+                            final ArrayList<String> contentsList = new ArrayList<>();
+                            final ArrayList<String> formatList = new ArrayList<>();
+                            user = FirebaseAuth.getInstance().getCurrentUser();
+                            FirebaseStorage storage = FirebaseStorage.getInstance();
+                            StorageReference storageRef = storage.getReference();
+                            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+                            final DocumentReference documentReference = postInfo == null ? firebaseFirestore.collection("posts").document() : firebaseFirestore.collection("posts").document(postInfo.getId());
+                            final Date date = postInfo == null ? new Date() : postInfo.getCreatedAt();
+                            for (int i = 0; i < parent.getChildCount(); i++) {
+                                LinearLayout linearLayout = (LinearLayout) parent.getChildAt(i);
+                                for (int ii = 0; ii < linearLayout.getChildCount(); ii++) {
+                                    View view = linearLayout.getChildAt(ii);
+                                    if (view instanceof EditText) {
+                                        String text = ((EditText) view).getText().toString();
+                                        if (text.length() > 0) {
+                                            loaderLayout.setVisibility(View.VISIBLE);
+
+                                            contentsList.add(text);
+                                            formatList.add("text");
                                         }
-                                    });
+                                    } else if (!isStorageUrl(pathList.get(pathCount))) {
+                                        String path = pathList.get(pathCount);
+                                        successCount++;
+                                        contentsList.add(path);
+                                        if (isImageFile(path)) {
+                                            formatList.add("image");
+                                        } else if (isVideoFile(path)) {
+                                            formatList.add("video");
+                                        } else {
+                                            formatList.add("text");
+                                        }
+                                        String[] pathArray = path.split("\\.");
+                                        final StorageReference mountainImagesRef = storageRef.child("posts/" + documentReference.getId() + "/" + pathCount + "." + pathArray[pathArray.length - 1]);
+                                        try {
+                                            InputStream stream = new FileInputStream(new File(pathList.get(pathCount)));
+                                            StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata("index", "" + (contentsList.size() - 1)).build();
+                                            UploadTask uploadTask = mountainImagesRef.putStream(stream, metadata);
+                                            uploadTask.addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception exception) {
+                                                }
+                                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    final int index = Integer.parseInt(taskSnapshot.getMetadata().getCustomMetadata("index"));
+                                                    mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+                                                            successCount--;
+                                                            contentsList.set(index, uri.toString());
+                                                            if (successCount == 0) {
+                                                                PostInfo postInfo = new PostInfo(profileImg, profileName, contentsList, formatList, user.getUid(), date, recipeId);
+                                                                storeUpload(documentReference, postInfo);
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        } catch (FileNotFoundException e) {
+                                            Log.e("로그", "에러: " + e.toString());
+                                        }
+                                        pathCount++;
+                                    }
                                 }
-                            });
-                        } catch (FileNotFoundException e) {
-                            Log.e("로그", "에러: " + e.toString());
+                            }
+                            if (successCount == 0) {
+                                PostInfo postInfo = new PostInfo(profileImg, profileName, contentsList, formatList, user.getUid(), date, recipeId);
+                                storeUpload(documentReference, postInfo);
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
                         }
-                        pathCount++;
                     }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
                 }
             }
-            if (successCount == 0) {
-                storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date, recipeId));
-            }
-        } else {
-            showToast(WritePostActivity.this, "제목을 입력해주세요.");
-        }
+        });
+
+
     }
 
     private void storeUpload(DocumentReference documentReference, final PostInfo postInfo) {
@@ -311,7 +333,6 @@ public class WritePostActivity extends BasicActivity {
 
     private void postInit() {
         if (postInfo != null) {
-            titleEditText.setText(postInfo.getTitle());
             ArrayList<String> contentsList = postInfo.getContents();
             selected_item_id = postInfo.getRecipeId();
             for (int i = 0; i < contentsList.size(); i++) {

@@ -153,9 +153,13 @@ public class ShowPostActivity extends BasicActivity {
                                 //후기 작성자가 본인이 아닐 경우 > 수정 / 삭제 menu 없애기
                                 String username = document.getData().get("publisher").toString();
                                 showBtn = username.equals(user.getUid());
+                                String profileImg;
+                                if(document.getData().get("profileImg") == null) {
+                                    profileImg = null;
+                                } else profileImg = document.getData().get("profileImg").toString();
 
-                                postList.add(new PostInfo(
-                                        document.getData().get("title").toString(),
+                                postList.add(new PostInfo(profileImg,
+                                        document.getData().get("profileName").toString(),
                                         (ArrayList<String>) document.getData().get("contents"),
                                         (ArrayList<String>) document.getData().get("formats"),
                                         document.getData().get("publisher").toString(),

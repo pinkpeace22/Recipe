@@ -59,7 +59,6 @@
         <activity android:name=".activity.GalleryActivity"/>
         <activity android:name=".activity.BasicActivity"/>
         <activity android:name=".activity.WritePostActivity"/>
-        <activity android:name=".activity.PostActivity"/>
         <activity android:name=".activity.RecipeActivity" />
         <activity android:name=".activity.ShowPostActivity"/>
         <activity android:name=".activity.MyPostActivity"/>

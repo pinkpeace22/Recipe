@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PostInfo implements Serializable {
-    private String title;
+    private String profileImg;
+    private String profileName;
     private ArrayList<String> contents;
     private ArrayList<String> formats;
     private String publisher;
@@ -16,8 +17,9 @@ public class PostInfo implements Serializable {
     private String recipeId; // 레시피 아이디
     private boolean mine;
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id, String recipeId, boolean mine){
-        this.title = title;
+    public PostInfo(String profileImg, String profileName, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id, String recipeId, boolean mine){
+        this.profileImg = profileImg;
+        this.profileName = profileName;
         this.contents = contents;
         this.formats = formats;
         this.publisher = publisher;
@@ -27,8 +29,9 @@ public class PostInfo implements Serializable {
         this.mine = mine;
     }
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String recipeId){
-        this.title = title;
+    public PostInfo(String profileImg, String profileName, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String recipeId){
+        this.profileImg = profileImg;
+        this.profileName = profileName;
         this.contents = contents;
         this.formats = formats;
         this.publisher = publisher;
@@ -36,8 +39,9 @@ public class PostInfo implements Serializable {
         this.recipeId = recipeId;
     }
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, boolean mine){
-        this.title = title;
+    public PostInfo(String profileImg, String profileName, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, boolean mine){
+        this.profileImg = profileImg;
+        this.profileName = profileName;
         this.contents = contents;
         this.formats = formats;
         this.publisher = publisher;
@@ -47,7 +51,8 @@ public class PostInfo implements Serializable {
 
     public Map<String, Object> getPostInfo(){
         Map<String, Object> docData = new HashMap<>();
-        docData.put("title",title);
+        docData.put("profileImg",profileImg);
+        docData.put("profileName",profileName);
         docData.put("contents",contents);
         docData.put("formats",formats);
         docData.put("publisher",publisher);
@@ -56,11 +61,11 @@ public class PostInfo implements Serializable {
         return  docData;
     }
 
-    public String getTitle(){
-        return this.title;
+    public String getProfileName(){
+        return this.profileName;
     }
-    public void setTitle(String title){
-        this.title = title;
+    public void setProfileName(String profileName){
+        this.profileName = profileName;
     }
     public ArrayList<String> getContents(){
         return this.contents;
@@ -103,5 +108,11 @@ public class PostInfo implements Serializable {
     }
     public void setMine(boolean mine) {
         this.mine = mine;
+    }
+    public String getProfileImg() {
+        return profileImg;
+    }
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 }
