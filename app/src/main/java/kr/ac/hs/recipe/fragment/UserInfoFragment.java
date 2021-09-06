@@ -5,8 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,11 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import kr.ac.hs.recipe.R;
-import kr.ac.hs.recipe.activity.MainActivity;
-import kr.ac.hs.recipe.activity.MyPostActivity;
-import kr.ac.hs.recipe.activity.ShowPostActivity;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +22,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.activity.MainActivity;
+import kr.ac.hs.recipe.activity.MyPostActivity;
 
 public class UserInfoFragment extends Fragment {
     private static final String TAG = "UserInfoFragment";
