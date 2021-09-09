@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:visibility="gone" />
+                android:text="페이스북으로 로그인" />
 
             <Button
                 android:id="@+id/facebookcustomButton"

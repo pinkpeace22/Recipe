@@ -2,6 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\meehy\\AndroidStudioProjects\\Recipe8\\snsaccount.jks')
+            keyAlias 'Key0'
+            keyPassword '456852'
+            storePassword '456852'
+            v2SigningEnabled false
+        }
+    }
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
