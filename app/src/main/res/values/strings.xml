@@ -14,5 +14,5 @@
 
     <!--facebook-->
     <string name="facebook_app_id">405358724254687</string>
-
+    <string name="fb_login_protocol_scheme"> 401e0ac314a042a798ab59bfd313c312 </string>
 </resources>
