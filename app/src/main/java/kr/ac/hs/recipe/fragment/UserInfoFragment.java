@@ -62,7 +62,7 @@ public class UserInfoFragment extends Fragment {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             if(document.getData().get("photoUrl") != null){
                                 Glide.with(getActivity()).load(document.getData().get("photoUrl")).centerCrop().override(500).into(profileImageView);
-                            }
+                            } else profileImageView.setImageResource(R.drawable.ic_baseline_person_24);
                             nameTextView.setText(document.getData().get("name").toString());
                         } else {
                             Log.d(TAG, "No such document");

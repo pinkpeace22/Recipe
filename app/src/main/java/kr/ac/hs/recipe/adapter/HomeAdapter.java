@@ -25,8 +25,6 @@ import kr.ac.hs.recipe.view.ReadContentsVIew;
 
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -68,18 +66,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
         final MainViewHolder mainViewHolder = new MainViewHolder(cardView);
 
-        if(mDataset.get(count).isMine() == false){
-            cardView.findViewById(R.id.menu).setVisibility(View.INVISIBLE);
-        }
-
         cardView.findViewById(R.id.menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPopup(v, mainViewHolder.getAdapterPosition());
             }
         });
-
-        count++;
 
         return mainViewHolder;
     }
@@ -91,13 +83,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
         ImageView profileImgView = cardView.findViewById(R.id.profileImgView);
 
         PostInfo postInfo = mDataset.get(position);
-        if(mDataset.get(position).getProfileImg() != null){
+        if(postInfo.getProfileImg() != null){
             Glide.with(activity).load(mDataset.get(position).getProfileImg()).centerCrop().override(500).into(profileImgView);
-        }
+        } else profileImgView.setImageResource(R.drawable.ic_baseline_person_24);
+
         nameTextView.setText(postInfo.getProfileName());
+
+        if(postInfo.isMine() == false){
+            cardView.findViewById(R.id.menu).setVisibility(View.INVISIBLE);
+        } else cardView.findViewById(R.id.menu).setVisibility(View.VISIBLE);
 
         ReadContentsVIew readContentsVIew = cardView.findViewById(R.id.readContentsView);
         LinearLayout contentsLayout = cardView.findViewById(R.id.contentsLayout);
+
 
         if (contentsLayout.getTag() == null || !contentsLayout.getTag().equals(postInfo)) {
             contentsLayout.setTag(postInfo);
@@ -140,6 +138,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
         inflater.inflate(R.menu.post, popup.getMenu());
         popup.show();
     }
+
 
     private void myStartActivity(Class c, PostInfo postInfo) {
         Intent intent = new Intent(activity, c);

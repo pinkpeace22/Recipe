@@ -95,7 +95,6 @@ public class ShowPostActivity extends BasicActivity {
                 }
             }
         });
-
         postsUpdate(false);
     }
 
@@ -103,6 +102,11 @@ public class ShowPostActivity extends BasicActivity {
     public void onPause(){
         super.onPause();
         homeAdapter.playerStop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -149,8 +153,6 @@ public class ShowPostActivity extends BasicActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
 
-
-                                //후기 작성자가 본인이 아닐 경우 > 수정 / 삭제 menu 없애기
                                 String username = document.getData().get("publisher").toString();
                                 showBtn = username.equals(user.getUid());
                                 String profileImg;
@@ -166,7 +168,6 @@ public class ShowPostActivity extends BasicActivity {
                                         new Date(document.getDate("createdAt").getTime()),
                                         document.getId(), document.getData().get("recipeId").toString(), showBtn));
                             }
-
                             homeAdapter.notifyDataSetChanged();
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
