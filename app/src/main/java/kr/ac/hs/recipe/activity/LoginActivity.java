@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 
 import kr.ac.hs.recipe.R;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -30,6 +31,8 @@ public class LoginActivity extends BasicActivity {
 
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
         findViewById(R.id.passwordResetButton).setOnClickListener(onClickListener);
+        findViewById(R.id.facebookButton).setOnClickListener(onClickListener);
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -42,6 +45,8 @@ public class LoginActivity extends BasicActivity {
                 case R.id.passwordResetButton:
                     myStartActivity(PasswordResetActivity.class);
                     break;
+                case R.id.facebookButton:
+                    myStartActivity(FacebookLoginActivity.class);
             }
         }
     };
@@ -79,4 +84,5 @@ public class LoginActivity extends BasicActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
 }

@@ -15,8 +15,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
         android:padding="20dp">
 
         <TextView
@@ -63,36 +63,34 @@
                 android:layout_weight="1"
                 android:text="로그인" />
 
-            <com.facebook.login.widget.LoginButton
+            <Button
                 android:id="@+id/facebookButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:color="#3b5998"
+                android:drawableLeft="@drawable/facebook_iconx"
                 android:text="페이스북으로 로그인" />
-
-            <Button
-                android:id="@+id/facebookcustomButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="페이스북으로 로그인"/>
 
             <Button
                 android:id="@+id/twitterButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:color="#00acee"
                 android:layout_weight="1"
+                android:drawableLeft="@drawable/twitter_iconx"
                 android:text="트위터로 로그인" />
 
-            <com.google.android.gms.common.SignInButton
+            <Button
                 android:id="@+id/googleButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:color="#FFFFFF"
+                android:drawableLeft="@drawable/google_iconx"
                 android:text="Google로 로그인" />
 
             <TextView
@@ -119,6 +117,6 @@
         layout="@layout/view_loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

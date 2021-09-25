@@ -3,18 +3,20 @@ package kr.ac.hs.recipe.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -23,8 +25,10 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Arrays;
+
 import kr.ac.hs.recipe.R;
-import kr.ac.hs.recipe.activity.BasicActivity;
+
 
 public class FacebookLoginActivity extends BasicActivity {
 
@@ -33,53 +37,64 @@ public class FacebookLoginActivity extends BasicActivity {
     private FirebaseAuth mAuth;
     // [END declare_auth]
     private CallbackManager mCallbackManager;
+    private Button facebookButton;
+    private LoginCallback mLoginCallback;
 
-    //facebook 인증 통합
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
+
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
 
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton facebookButton = findViewById(R.id.facebookButton);
-        facebookButton.setReadPermissions("email", "public_profile");
+        mLoginCallback = new LoginCallback();
 
-        facebookButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-            }
-        });
         //facebook유효성검사
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        boolean isLoggedln = accessToken != null && !accessToken.isExpired();
+        if (isLoggedln) {
+            Log.e("페이스북","유효성검사" + mAuth);
+            Log.e("페이스북 세션", "있음");
+            handleFacebookAccessToken(accessToken);
+        } else {
+            LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    Log.e("Callback :: ", "onSuccess");
+                    handleFacebookAccessToken(loginResult.getAccessToken());
+                }
+
+                @Override
+                public void onCancel() {
+                    Log.e("페이스북 로그인 :", "onCancel");
+                }
+
+                @Override
+                public void onError(FacebookException error) {
+                    Log.e("페이스북 로그인 :", "onError : " + error.getMessage());
+                }
+            });
+
+
+        }
+
+        facebookButton = (Button) findViewById(R.id.facebookButton);
+        facebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginManager loginManager = LoginManager.getInstance();
+                loginManager.logInWithReadPermissions(FacebookLoginActivity.this,
+                        Arrays.asList("public_profile", "email"));
+                loginManager.registerCallback(mCallbackManager, mLoginCallback);
+            }
+        });
 
     }
-    //사용자가 현재 로그인되어 있는지 확인
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Pass the activity result back to the Facebook SDK
         mCallbackManager.onActivityResult(requestCode, resultCode, data);

@@ -30,7 +30,9 @@
         <!-- 로딩 화면 -->
         <activity
             android:name=".activity.LoadingActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+            
+        </activity>
 
         <!-- 로그인 -->
         <activity
