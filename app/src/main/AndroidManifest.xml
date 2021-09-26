@@ -30,7 +30,9 @@
         <!-- 로딩 화면 -->
         <activity
             android:name=".activity.LoadingActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+
+        </activity>
 
         <!-- 로그인 -->
         <activity
@@ -63,7 +65,7 @@
         <activity android:name=".activity.RecipeActivity" />
         <activity android:name=".activity.ShowPostActivity" />
         <activity android:name=".activity.MyPostActivity" />
-
+        <activity android:name=".activity.AnonymousAuthActivity" />
         <!--facebook ID -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -79,8 +81,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>

@@ -87,7 +87,6 @@ public class MainActivity extends BasicActivity {
         mContext = this;
 
 
-
 /*        startLoading.start(); // 로딩 화면
         try{
             startLoading.join();
@@ -196,7 +195,7 @@ public class MainActivity extends BasicActivity {
         public void run() {
             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             if (firebaseUser == null) {
-                myStartActivity(SignUpActivity.class);
+                myStartActivity(LoginActivity.class);
             } else {
                 DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(firebaseUser.getUid());
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
