@@ -106,7 +106,7 @@ public class MainActivity extends BasicActivity {
 
 
         //myRef.removeValue(); // drop all DB
-        updateData();
+        //updateData();
 
 
         // 앱 최초 실행 여부 판단
