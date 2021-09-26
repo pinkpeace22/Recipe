@@ -2,19 +2,25 @@ package kr.ac.hs.recipe.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
+import kr.ac.hs.recipe.R;
+
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import kr.ac.hs.recipe.R;
+import java.util.Arrays;
 
 import static kr.ac.hs.recipe.Util.showToast;
 
@@ -26,11 +32,16 @@ public class LoginActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setToolbarTitle("로그인");
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
 
         mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
         findViewById(R.id.passwordResetButton).setOnClickListener(onClickListener);
+        findViewById(R.id.signUp_Button).setOnClickListener(onClickListener);
+        SignInButton signInButton = findViewById(R.id.googleButton);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -43,6 +54,10 @@ public class LoginActivity extends BasicActivity {
                 case R.id.passwordResetButton:
                     myStartActivity(PasswordResetActivity.class);
                     break;
+                case R.id.signUp_Button:
+                    myStartActivity(SignUpActivity.class);
+                    break;
+
             }
         }
     };

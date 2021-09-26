@@ -20,10 +20,11 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:gravity="center"
             android:text="회원가입"
-            android:textSize="50sp" />
+            android:textSize="30sp"
+            android:textStyle="bold"  />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -93,44 +94,47 @@
                 android:layout_weight="1"
                 android:text="확인" />
 
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/facebookButton"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="페이스북으로 로그인" />
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/twitterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="트위터로 로그인" />
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/facebookButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/googleButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Google로 로그인" />
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"/>
+
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/googleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text=" * 비밀번호가 기억나지 않는다면 이용해주세요 :) "
+                android:text=" * 게스트 로그인"
                 android:textSize="15dp" />
 
             <Button
-                android:id="@+id/passwordResetButton"
+                android:id="@+id/guestButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="비밀번호 재설정" />
+                android:text="게스트 로그인" />
 
         </LinearLayout>
 

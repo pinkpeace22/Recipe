@@ -22,14 +22,35 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:gravity="center"
             android:text="로그인"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="가입 하지 않으신 분은 회원가입을 해주세요:)"
+                android:layout_margin="30dp"
+                android:layout_gravity="center"
+                android:textSize="15dp"/>
+
+            <Button
+                android:id="@+id/signUp_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="회원가입" />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,35 +84,31 @@
                 android:layout_weight="1"
                 android:text="로그인" />
 
-            <Button
-                android:id="@+id/facebookButton"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:backgroundTint="#3b5998"
-                android:drawableLeft="@drawable/facebook_iconx"
-                android:text="페이스북으로 로그인" />
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/twitterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="#00acee"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/twitter_iconx"
-                android:text="트위터로 로그인" />
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/facebookButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"/>
 
-            <Button
-                android:id="@+id/googleButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
-                android:drawableLeft="@drawable/google_iconx"
-                android:text="Google로 로그인" />
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/googleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

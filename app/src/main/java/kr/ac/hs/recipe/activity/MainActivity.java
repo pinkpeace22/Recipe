@@ -164,6 +164,8 @@ public class MainActivity extends BasicActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        getHashKey();
     }
 
     @Override
@@ -191,7 +193,7 @@ public class MainActivity extends BasicActivity {
         public void run() {
             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             if (firebaseUser == null) {
-                myStartActivity(SignUpActivity.class);
+                myStartActivity(LoginActivity.class);
             } else {
                 DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(firebaseUser.getUid());
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -449,7 +451,7 @@ public class MainActivity extends BasicActivity {
     }
 
     // 해쉬키
-    private void getHashKey() {
+    private void getHashKey(){
         PackageInfo packageInfo = null;
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
