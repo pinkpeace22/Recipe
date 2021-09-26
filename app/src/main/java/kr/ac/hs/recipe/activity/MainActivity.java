@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -48,6 +52,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -100,7 +106,7 @@ public class MainActivity extends BasicActivity {
 
 
         //myRef.removeValue(); // drop all DB
-        //updateData();
+        updateData();
 
 
         // 앱 최초 실행 여부 판단
@@ -439,6 +445,28 @@ public class MainActivity extends BasicActivity {
             CustomAdapter.keepList.addAll(readedObject);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    // 해쉬키
+    private void getHashKey() {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("KeyHash", "MessageDigest를 가져올 수 없습니다. 서명 =" + signature, e);
+            }
         }
     }
 }

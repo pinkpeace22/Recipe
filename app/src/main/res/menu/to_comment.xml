@@ -8,4 +8,10 @@
         android:icon="@drawable/ic_baseline_insert_comment_24"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_timer"
+        android:title="타이머"
+        android:icon="@drawable/ic_baseline_timer_24"
+        app:showAsAction="ifRoom" />
+
 </menu>
