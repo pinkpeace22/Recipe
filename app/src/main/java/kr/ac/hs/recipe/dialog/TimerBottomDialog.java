@@ -178,18 +178,21 @@ public class TimerBottomDialog extends BaseBottomSheetDialog<DialogTimerBottomSh
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btn_timer_stop:
+                    L.i(":::::btn_timer_stop");
                     if (TimerType.byRemainTime(TimerType.TIMER_1) == 0) {
                         return;
                     }
                     updatePuaseTimerUi(TimerType.TIMER_1);
                     break;
                 case R.id.btn_timer_stop2:
+                    L.i(":::::btn_timer_stop2");
                     if (TimerType.byRemainTime(TimerType.TIMER_2) == 0) {
                         return;
                     }
                     updatePuaseTimerUi(TimerType.TIMER_2);
                     break;
                 case R.id.btn_timer_stop3:
+                    L.i(":::::btn_timer_stop3");
                     if (TimerType.byRemainTime(TimerType.TIMER_3) == 0) {
                         return;
                     }
@@ -267,7 +270,7 @@ public class TimerBottomDialog extends BaseBottomSheetDialog<DialogTimerBottomSh
                     if (!isTimerPuase2) {
                         binding.btnTimerStop2.setText("재시작");
                         isTimerPuase2 = true;
-                        cancelTimer(TimerType.TIMER_1);
+                        cancelTimer(TimerType.TIMER_2);
                     } else {
                         binding.btnTimerStop2.setText("일시 정지");
                         isTimerPuase2 = false;
@@ -280,7 +283,7 @@ public class TimerBottomDialog extends BaseBottomSheetDialog<DialogTimerBottomSh
                     if (!isTimerPuase3) {
                         binding.btnTimerStop3.setText("재시작");
                         isTimerPuase3 = true;
-                        cancelTimer(TimerType.TIMER_1);
+                        cancelTimer(TimerType.TIMER_3);
                     } else {
                         binding.btnTimerStop3.setText("일시 정지");
                         isTimerPuase3 = false;
