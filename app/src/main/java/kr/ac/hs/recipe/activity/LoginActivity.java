@@ -44,11 +44,9 @@ public class LoginActivity extends BasicActivity {
                 case R.id.signUp_Button:
                     myStartActivity(SignUpActivity.class);
                     break;
-
                 case R.id.loginButton:
                     login();
                     break;
-
                 case R.id.passwordResetButton:
                     myStartActivity(PasswordResetActivity.class);
                     break;

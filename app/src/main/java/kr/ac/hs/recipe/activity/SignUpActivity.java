@@ -7,6 +7,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -36,6 +37,7 @@ public class SignUpActivity extends BasicActivity {
         findViewById(R.id.login_Button).setOnClickListener(onClickListener);
         findViewById(R.id.checkButton).setOnClickListener(onClickListener);
         findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
+        findViewById(R.id.guestButton).setOnClickListener(onClickListener);
     }
 
     @Override
@@ -59,10 +61,14 @@ public class SignUpActivity extends BasicActivity {
                 case R.id.signUpButton:
                     signUp();
                     break;
+                case R.id.guestButton:
+                    signInAnonymously();
+                    break;
 
             }
         }
     };
+
 
     private void signUp() {
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
@@ -136,6 +142,26 @@ public class SignUpActivity extends BasicActivity {
                     });
         }
 
+    }
+
+    private void signInAnonymously() {
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "게스트 로그인: 성공");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            myStartActivity(MainActivity.class);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "게스트 로그인 : 실패", task.getException());
+                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
 }

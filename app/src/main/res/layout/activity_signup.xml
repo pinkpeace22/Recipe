@@ -61,23 +61,23 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/emailEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="이메일"
-                android:inputType="textEmailAddress" />
+                <EditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="이메일"
+                    android:inputType="textEmailAddress" />
 
                 <Button
                     android:id="@+id/checkButton"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="이메일 확인"/>
+                    android:layout_weight="1"
+                    android:text="이메일 확인" />
 
             </LinearLayout>
 
@@ -101,19 +101,26 @@
                 android:hint="비밀번호확인"
                 android:inputType="textPassword" />
 
-                <Button
-                    android:id="@+id/signUpButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="가입" />
+            <Button
+                android:id="@+id/signUpButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="가입" />
 
-            </LinearLayout>
-
-
+            <Button
+                android:id="@+id/guestButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="게스트 로그인" />
 
         </LinearLayout>
+
+
+    </LinearLayout>
 
 
     <include
