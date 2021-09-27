@@ -1,6 +1,9 @@
 package kr.ac.hs.recipe.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,7 +36,7 @@ import kr.ac.hs.recipe.activity.MyPostActivity;
 
 public class UserInfoFragment extends Fragment {
     private static final String TAG = "UserInfoFragment";
-    Button logout, myComment;
+    Button logout, delete, myComment;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
 
@@ -55,6 +58,7 @@ public class UserInfoFragment extends Fragment {
         final TextView emailTextView = view.findViewById(R.id.emailTextView);
         final TextView nameTextView = view.findViewById(R.id.nameTextView);
         logout = view.findViewById(R.id.logout);
+        delete = view.findViewById(R.id.delete);
         myComment = view.findViewById(R.id.myComment);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -101,8 +105,32 @@ public class UserInfoFragment extends Fragment {
             }
         });
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+
         //setHasOptionsMenu(true);
         return view;
+    }
+
+    void showDialog() {
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(getContext()).setMessage("정말로 탈퇴하시겠습니까?").setPositiveButton("탈퇴", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                user.delete();
+                myStartActivity(MainActivity.class);
+
+            }
+        }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
     }
 
 /*
@@ -140,5 +168,10 @@ public class UserInfoFragment extends Fragment {
         super.onPause();
     }
 
+    private void myStartActivity(Class c) {
+        Intent intent = new Intent(getActivity(), c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
 }

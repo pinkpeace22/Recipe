@@ -78,7 +78,7 @@ public class LoginActivity extends BasicActivity {
                                 myStartActivity(MainActivity.class);
                             } else {
                                 if (task.getException() != null) {
-                                    showToast(LoginActivity.this, task.getException().toString());
+                                    showToast(LoginActivity.this, "로그인에 실패하였습니다.");
                                 }
                             }
                         }
@@ -92,6 +92,14 @@ public class LoginActivity extends BasicActivity {
         Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 
 }

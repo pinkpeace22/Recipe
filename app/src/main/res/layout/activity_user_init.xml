@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,25 +18,44 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:layout_below="@+id/toolbar"
             android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:gravity="center"
-                android:text="회원정보"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
+                android:layout_height="170dp"
+                android:gravity="center"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="회원정보"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="콕콕봐에서 사용할 프로필 이미지와 닉네임을 정해주세요."
+                    android:textColor="#bbbbbb"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="20dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="200dp"
@@ -48,18 +68,15 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:src="@drawable/ic_baseline_person_24" />
+
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:text="앱 안에서 사용할 닉네임을 정해주세요:)"/>
 
                 <EditText
                     android:id="@+id/nameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
                     android:ems="10"
                     android:hint="닉네임"
                     android:inputType="textPersonName" />
@@ -67,8 +84,19 @@
                 <Button
                     android:id="@+id/checkButton"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="확인" />
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/classification_button"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="3dp"
+                    android:text="확인"
+                    android:textColor="@color/searchTextColor" />
 
             </LinearLayout>
         </LinearLayout>
@@ -115,6 +143,6 @@
         layout="@layout/view_loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

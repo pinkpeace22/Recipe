@@ -33,14 +33,6 @@ public class SignUpActivity extends BasicActivity {
         findViewById(R.id.login_Button).setOnClickListener(onClickListener);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        moveTaskToBack(true);
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
-    }
-
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
