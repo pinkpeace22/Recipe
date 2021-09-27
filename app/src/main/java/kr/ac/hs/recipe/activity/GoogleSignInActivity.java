@@ -101,7 +101,6 @@ public class GoogleSignInActivity extends BasicActivity {
                             Log.d(TAG, "구글로 로그인하기를 성공하셨습니다!");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            myStartActivity(MainActivity.class);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "구글로 로그인하기를 실패하셨습니다.", task.getException());
@@ -116,7 +115,6 @@ public class GoogleSignInActivity extends BasicActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        myStartActivity(MainActivity.class);
     }
     // [END signin]
 
@@ -124,9 +122,4 @@ public class GoogleSignInActivity extends BasicActivity {
 
     }
 
-    private void myStartActivity(Class c) {
-        Intent intent = new Intent(this, c);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
 }

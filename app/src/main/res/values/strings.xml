@@ -13,6 +13,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--facebook-->
-    <string name="facebook_app_id">405358724254687</string>
-    <string name="fb_login_protocol_scheme"> 401e0ac314a042a798ab59bfd313c312 </string>
+    <string name="facebook_app_id">838941793651971</string>
+    <string name="fb_login_protocol_scheme"> 7b71de27dcce8c1f5d17408cb78bd84f </string>
 </resources>
