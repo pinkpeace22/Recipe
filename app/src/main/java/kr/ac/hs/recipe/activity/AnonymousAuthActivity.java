@@ -51,7 +51,6 @@ public class AnonymousAuthActivity extends BasicActivity {
                             Log.d(TAG, "signInAnonymously:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            myStartActivity(MainActivity.class);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInAnonymously:failure", task.getException());
@@ -76,7 +75,6 @@ public class AnonymousAuthActivity extends BasicActivity {
                             Log.d(TAG, "linkWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
                             updateUI(user);
-                            myStartActivity(MainActivity.class);
                         } else {
                             Log.w(TAG, "linkWithCredential:failure", task.getException());
                             Toast.makeText(AnonymousAuthActivity.this, "Authentication failed.",
@@ -90,12 +88,6 @@ public class AnonymousAuthActivity extends BasicActivity {
 
     private void updateUI(FirebaseUser user) {
 
-    }
-
-    private void myStartActivity(Class c) {
-        Intent intent = new Intent(this, c);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
     }
 
 }
