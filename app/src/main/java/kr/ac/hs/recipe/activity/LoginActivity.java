@@ -2,7 +2,6 @@ package kr.ac.hs.recipe.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -11,9 +10,7 @@ import androidx.annotation.NonNull;
 
 import kr.ac.hs.recipe.R;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.common.SignInButton;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
