@@ -2,6 +2,7 @@ package kr.ac.hs.recipe.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -21,6 +22,7 @@ import static kr.ac.hs.recipe.Util.showToast;
 
 public class SignUpActivity extends BasicActivity {
     private FirebaseAuth mAuth;
+    private String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,9 @@ public class SignUpActivity extends BasicActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
         findViewById(R.id.login_Button).setOnClickListener(onClickListener);
+//        findViewById(R.id.checkButton).setOnClickListener(onClickListener);
+        findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
     }
 
     @Override
@@ -45,15 +48,19 @@ public class SignUpActivity extends BasicActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.signUpButton:
-                    signUp();
-                    break;
                 case R.id.login_Button:
                     myStartActivity(LoginActivity.class);
                     break;
+//                case R.id.checkButton:
+//                    break;
+                case R.id.signUpButton:
+                    signUp();
+                    break;
+
             }
         }
     };
+
 
     private void signUp() {
         String email = ((EditText)findViewById(R.id.emailEditText)).getText().toString();
@@ -85,6 +92,21 @@ public class SignUpActivity extends BasicActivity {
             }
         }else {
             showToast(SignUpActivity.this, "이메일 또는 비밀번호를 입력해 주세요.");
+        }
+    }
+
+    // 이메일 유효성 검사
+    private boolean isValidEmail() {
+        if (email.isEmpty()) {
+            //이메일 공백
+            showToast(SignUpActivity.this, "이메일이 공백입니다.");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            // 이메일 형식 불일치
+            showToast(SignUpActivity.this, "이메일 형식이 불일치 합니다.");
+            return false;
+        } else {
+            return true;
         }
     }
 

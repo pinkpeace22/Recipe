@@ -28,12 +28,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import kr.ac.hs.recipe.R;
+import kr.ac.hs.recipe.activity.LoginActivity;
 import kr.ac.hs.recipe.activity.MainActivity;
 import kr.ac.hs.recipe.activity.MyPostActivity;
+import kr.ac.hs.recipe.activity.SignUpActivity;
+
+import static kr.ac.hs.recipe.Util.showToast;
 
 public class UserInfoFragment extends Fragment {
     private static final String TAG = "UserInfoFragment";
-    Button logout, myComment;
+    Button logout, delete, myComment;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
 
@@ -55,6 +59,7 @@ public class UserInfoFragment extends Fragment {
         final TextView emailTextView = view.findViewById(R.id.emailTextView);
         final TextView nameTextView = view.findViewById(R.id.nameTextView);
         logout = view.findViewById(R.id.logout);
+        delete = view.findViewById(R.id.delete);
         myComment = view.findViewById(R.id.myComment);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -69,9 +74,10 @@ public class UserInfoFragment extends Fragment {
                     if (document != null) {
                         if (document.exists()) {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            if(document.getData().get("photoUrl") != null){
+                            if (document.getData().get("photoUrl") != null) {
                                 Glide.with(getActivity()).load(document.getData().get("photoUrl")).centerCrop().override(500).into(profileImageView);
-                            } else profileImageView.setImageResource(R.drawable.ic_baseline_person_24);
+                            } else
+                                profileImageView.setImageResource(R.drawable.ic_baseline_person_24);
                             nameTextView.setText(document.getData().get("name").toString());
                         } else {
                             Log.d(TAG, "No such document");
@@ -98,6 +104,14 @@ public class UserInfoFragment extends Fragment {
                 firebaseAuth = FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
                 ((MainActivity) MainActivity.mContext).myStartActivity(MainActivity.class);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user.delete();
+                Log.d(TAG, "사용자의 계정이 삭제 되었습니다.");
             }
         });
 
@@ -136,7 +150,7 @@ public class UserInfoFragment extends Fragment {
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
     }
 

@@ -105,6 +105,25 @@
                     android:text="로그아웃"
                     android:textColor="@color/searchTextColor"
                     android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@drawable/classification_button"
+                    android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="3dp"
+                    android:text="계정탈퇴"
+                    android:textColor="@color/searchTextColor"
+                    android:layout_weight="1" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

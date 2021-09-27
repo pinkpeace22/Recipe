@@ -32,28 +32,28 @@ public class LoginActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setToolbarTitle("로그인");
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
 
         mAuth = FirebaseAuth.getInstance();
 
+        findViewById(R.id.signUp_Button).setOnClickListener(onClickListener);
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
         findViewById(R.id.passwordResetButton).setOnClickListener(onClickListener);
-        findViewById(R.id.signUp_Button).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.signUp_Button:
+                    myStartActivity(SignUpActivity.class);
+                    break;
+
                 case R.id.loginButton:
                     login();
                     break;
+
                 case R.id.passwordResetButton:
                     myStartActivity(PasswordResetActivity.class);
-                    break;
-                case R.id.signUp_Button:
-                    myStartActivity(SignUpActivity.class);
                     break;
 
             }
@@ -78,7 +78,7 @@ public class LoginActivity extends BasicActivity {
                                 myStartActivity(MainActivity.class);
                             } else {
                                 if (task.getException() != null) {
-                                    showToast(LoginActivity.this, task.getException().toString());
+                                    showToast(LoginActivity.this, "로그인에 실패하셨습니다.");
                                 }
                             }
                         }
