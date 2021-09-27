@@ -5,6 +5,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,6 +35,7 @@ public class UserInfoFragment extends Fragment {
     private static final String TAG = "UserInfoFragment";
     Button logout, myComment;
     FirebaseAuth firebaseAuth;
+    FirebaseUser user;
 
     public UserInfoFragment() {
         // Required empty public constructor
@@ -47,11 +52,15 @@ public class UserInfoFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_user_info, container, false);
         final ImageView profileImageView = view.findViewById(R.id.profileImageView);
+        final TextView emailTextView = view.findViewById(R.id.emailTextView);
         final TextView nameTextView = view.findViewById(R.id.nameTextView);
         logout = view.findViewById(R.id.logout);
         myComment = view.findViewById(R.id.myComment);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        emailTextView.setText(user.getEmail());
+
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -74,6 +83,14 @@ public class UserInfoFragment extends Fragment {
             }
         });
 
+        myComment.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) MainActivity.mContext).myStartActivity(MyPostActivity.class);
+            }
+        });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -84,16 +101,29 @@ public class UserInfoFragment extends Fragment {
             }
         });
 
-        myComment.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) MainActivity.mContext).myStartActivity(MyPostActivity.class);
-            }
-        });
-
+        //setHasOptionsMenu(true);
         return view;
     }
+
+/*
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+       //super.onCreateOptionsMenu(menu, menuInflater);
+        menuInflater.inflate(R.menu.to_mycomment, menu);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_myComment:
+                ((MainActivity) MainActivity.mContext).myStartActivity(MyPostActivity.class);
+            break;
+        }
+        return  super.onOptionsItemSelected(item);
+    }
+*/
 
     @Override
     public void onAttach(Context context) {
