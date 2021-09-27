@@ -63,30 +63,6 @@
         <activity android:name=".activity.RecipeActivity" />
         <activity android:name=".activity.ShowPostActivity" />
         <activity android:name=".activity.MyPostActivity" />
-        <activity android:name=".activity.AnonymousAuthActivity" />
-
-        <!--facebook ID -->
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"
-            tools:replace="android:value"/>
-
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
-        <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter>
-        </activity>
 
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713(광고 안넣음) -->

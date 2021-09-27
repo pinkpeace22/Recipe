@@ -31,9 +31,6 @@ public class SignUpActivity extends BasicActivity {
 
         findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
         findViewById(R.id.login_Button).setOnClickListener(onClickListener);
-        SignInButton signInButton = findViewById(R.id.googleButton);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
-        findViewById(R.id.guestButton).setOnClickListener(onClickListener);
     }
 
     @Override
@@ -53,9 +50,6 @@ public class SignUpActivity extends BasicActivity {
                     break;
                 case R.id.login_Button:
                     myStartActivity(LoginActivity.class);
-                    break;
-                case R.id.guestButton:
-                    myStartActivity(AnonymousAuthActivity.class);
                     break;
             }
         }

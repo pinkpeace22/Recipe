@@ -40,8 +40,6 @@ public class LoginActivity extends BasicActivity {
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
         findViewById(R.id.passwordResetButton).setOnClickListener(onClickListener);
         findViewById(R.id.signUp_Button).setOnClickListener(onClickListener);
-        SignInButton signInButton = findViewById(R.id.googleButton);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
