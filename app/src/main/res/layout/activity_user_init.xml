@@ -43,8 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="콕콕봐에서 사용할 프로필 이미지와 닉네임을 정해주세요."
-                    android:textColor="#bbbbbb"
-                    android:textSize="12sp" />
+                    android:textColor="#bbbbbb" />
 
             </LinearLayout>
 
@@ -120,19 +119,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="5dp">
-
-                <Button
-                    android:id="@+id/picture"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="사진촬영" />
+                android:padding="10dp">
 
                 <Button
                     android:id="@+id/gallery"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="갤러리" />
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/classification_button"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="3dp"
+                    android:text="갤러리"
+                    android:textColor="@color/searchTextColor" />
+
+                <Button
+                    android:id="@+id/picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/classification_button"
+                    android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="3dp"
+                    android:text="사진 촬영"
+                    android:textColor="@color/searchTextColor" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

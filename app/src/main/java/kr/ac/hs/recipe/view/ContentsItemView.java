@@ -32,25 +32,25 @@ public class ContentsItemView extends LinearLayout {
         setOrientation(LinearLayout.VERTICAL);
         LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         addView(layoutInflater.inflate(R.layout.view_contents_image, this, false));
-        addView(layoutInflater.inflate(R.layout.view_contents_edit_text, this, false));
+        //addView(layoutInflater.inflate(R.layout.view_contents_edit_text, this, false));
 
         imageView = findViewById(R.id.contentsImageView);
-        editText = findViewById(R.id.contentsEditText);
+        //editText = findViewById(R.id.contentsEditText);
     }
 
     public void setImage(String path){
         Glide.with(this).load(path).override(1000).into(imageView);
     }
 
-    public void setText(String text){
+/*    public void setText(String text){
         editText.setText(text);
-    }
+    }*/
 
     public void setOnClickListener(OnClickListener onClickListener){
         imageView.setOnClickListener(onClickListener);
     }
 
-    public void setOnFocusChangeListener(OnFocusChangeListener onFocusChangeListener){
+/*    public void setOnFocusChangeListener(OnFocusChangeListener onFocusChangeListener){
         editText.setOnFocusChangeListener(onFocusChangeListener);
-    }
+    }*/
 }

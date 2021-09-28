@@ -73,7 +73,7 @@ public class WritePostActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_post);
-        setToolbarTitle("게시글 작성");
+        setToolbarTitle("리뷰 작성");
 
         parent = findViewById(R.id.contentsLayout);
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
@@ -255,8 +255,6 @@ public class WritePostActivity extends BasicActivity {
                                             formatList.add("image");
                                         } else if (isVideoFile(path)) {
                                             formatList.add("video");
-                                        } else {
-                                            formatList.add("text");
                                         }
                                         String[] pathArray = path.split("\\.");
                                         final StorageReference mountainImagesRef = storageRef.child("posts/" + documentReference.getId() + "/" + pathCount + "." + pathArray[pathArray.length - 1]);
@@ -351,13 +349,13 @@ public class WritePostActivity extends BasicActivity {
                         }
                     });
 
-                    contentsItemView.setOnFocusChangeListener(onFocusChangeListener);
+/*                    contentsItemView.setOnFocusChangeListener(onFocusChangeListener);
                     if (i < contentsList.size() - 1) {
                         String nextContents = contentsList.get(i + 1);
                         if (!isStorageUrl(nextContents)) {
                             contentsItemView.setText(nextContents);
                         }
-                    }
+                    }*/
                 } else if (i == 0) {
                     contentsEditText.setText(contents);
                 }

@@ -36,7 +36,7 @@
 
             <EditText
                 android:id="@+id/searchText"
-                android:layout_width="270dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint="  메뉴 / 재료명을 선택 후 검색하세요!"
@@ -44,13 +44,6 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:textSize="6.5pt" />
-
-            <ImageView
-                android:id="@+id/backtoSearchBtn"
-                android:layout_width="35dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_backtosearchbutton"/>
 
         </LinearLayout>
 

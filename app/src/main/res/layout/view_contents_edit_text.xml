@@ -6,5 +6,5 @@
     android:layout_height="wrap_content"
     android:ems="10"
     android:gravity="top"
-    android:hint="내용"
+    android:hint="리뷰를 작성해주세요."
     android:inputType="textMultiLine" />

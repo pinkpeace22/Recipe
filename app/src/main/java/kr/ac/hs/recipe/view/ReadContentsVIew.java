@@ -66,13 +66,13 @@ public class ReadContentsVIew extends LinearLayout {
         ArrayList<String> formatList = postInfo.getFormats();
 
         for (int i = 0; i < contentsList.size(); i++) {
-            if (i == moreIndex) {
+            /*if (i == moreIndex) {
                 TextView textView = new TextView(context);
                 textView.setLayoutParams(layoutParams);
                 textView.setText("더보기...");
                 contentsLayout.addView(textView);
                 break;
-            }
+            }*/
 
             String contents = contentsList.get(i);
             String formats = formatList.get(i);

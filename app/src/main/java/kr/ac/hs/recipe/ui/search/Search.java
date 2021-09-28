@@ -41,7 +41,6 @@ public class Search extends Fragment {
 
     EditText searchText;
     LinearLayout classification, searchList, searchLoading;
-    ImageView backBtn;
     public ListView listView;
     CustomAdapter adapter;
     ToggleButton searchToggle;
@@ -66,7 +65,6 @@ public class Search extends Fragment {
         classification = v.findViewById(R.id.classification_layout);
         searchList = v.findViewById(R.id.searchlist_layout);
         searchLoading = v.findViewById(R.id.searchLoading_layout);
-        backBtn = v.findViewById(R.id.backtoSearchBtn);
         //backBtn.setColorFilter(Color.parseColor("#80688A"));
         listView = v.findViewById(R.id.searchlist);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
@@ -297,21 +295,6 @@ public class Search extends Fragment {
                 return true;
             }
 
-        });
-
-        // 분류버튼 목록 페이지로 돌아가는 버튼
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchText.getText().clear();
-                searchText.clearFocus();
-
-                adapter.clear(); // 검색 결과 목록 초기화
-                listView.setAdapter(adapter);
-
-                classification.setVisibility(View.VISIBLE);
-                searchList.setVisibility(View.INVISIBLE);
-            }
         });
 
         // 목록 눌렀을 때 > 레시피 세부 페이지

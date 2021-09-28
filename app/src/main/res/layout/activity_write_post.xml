@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <include
         layout="@layout/view_toolbar"
@@ -12,14 +12,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="40dp">
 
             <LinearLayout
                 android:id="@+id/contentsLayout"
@@ -44,18 +44,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:layout_marginTop="20dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                android:orientation="horizontal">
+                android:paddingBottom="5dp">
 
                 <Button
                     android:id="@+id/image"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="2dp"
                     android:layout_marginRight="3dp"
                     android:layout_weight="1"
                     android:background="@drawable/classification_button"
+                    android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
                     android:text="이미지"
@@ -67,12 +69,14 @@
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="3dp"
+                    android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:background="@drawable/classification_button"
+                    android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
-                    android:text="비디오"
-                    android:textColor="@color/searchTextColor"/>
+                    android:text="동영상"
+                    android:textColor="@color/searchTextColor" />
 
             </LinearLayout>
 
@@ -81,13 +85,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/classification_button"
-                android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:text="확인"
+                android:text="작성하기"
                 android:textColor="@color/searchTextColor" />
 
         </LinearLayout>
@@ -113,25 +118,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:padding="10dp">
 
-                <Button
-                    android:id="@+id/imageModify"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="이미지 수정" />
+                    android:layout_height="60dp">
 
-                <Button
-                    android:id="@+id/videoModify"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="비디오 수정" />
+                    <Button
+                        android:id="@+id/imageModify"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/classification_button"
+                        android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="이미지 수정"
+                        android:textColor="@color/searchTextColor" />
+
+                    <Button
+                        android:id="@+id/videoModify"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/classification_button"
+                        android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="동영상 수정"
+                        android:textColor="@color/searchTextColor" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/delete"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="삭제" />
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/classification_button"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:text="삭제"
+                    android:textColor="@color/searchTextColor" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -142,6 +179,6 @@
         layout="@layout/view_loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

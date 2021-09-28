@@ -52,6 +52,8 @@ public class PasswordResetActivity extends BasicActivity {
                             loaderLayout.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
                                 showToast(PasswordResetActivity.this, "이메일을 보냈습니다.");
+                            }else {
+                                showToast(PasswordResetActivity.this, "이메일 보내기를 실패했습니다.");
                             }
                         }
                     });
