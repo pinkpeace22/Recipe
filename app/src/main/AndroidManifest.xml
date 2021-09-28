@@ -54,7 +54,7 @@
         </activity>
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.SignUpActivity" />
-        <activity android:name=".activity.PasswordResetActivity" />
+        <activity android:name=".activity.PasswordResetActivity"/>
         <activity android:name=".activity.MemberInitActivity" />
         <activity android:name=".activity.CameraActivity" />
         <activity android:name=".activity.GalleryActivity" />
@@ -63,7 +63,6 @@
         <activity android:name=".activity.RecipeActivity" />
         <activity android:name=".activity.ShowPostActivity" />
         <activity android:name=".activity.MyPostActivity" />
-
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713(광고 안넣음) -->
         <meta-data

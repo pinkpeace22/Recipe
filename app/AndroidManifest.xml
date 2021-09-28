@@ -48,7 +48,7 @@
         </activity>
         <activity android:name=".activity.WritePostActivity">
         </activity>
-        <activity android:name=".activity.PostActivity">
+        <activity android:name=".activity.MyPostActivity">
         </activity>
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->

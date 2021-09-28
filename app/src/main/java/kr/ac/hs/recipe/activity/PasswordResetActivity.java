@@ -7,10 +7,11 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
-import kr.ac.hs.recipe.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import kr.ac.hs.recipe.R;
 
 import static kr.ac.hs.recipe.Util.showToast;
 
@@ -52,6 +53,8 @@ public class PasswordResetActivity extends BasicActivity {
                             loaderLayout.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
                                 showToast(PasswordResetActivity.this, "이메일을 보냈습니다.");
+                            }else {
+                                showToast(PasswordResetActivity.this, "이메일 보내기를 실패했습니다.");
                             }
                         }
                     });
