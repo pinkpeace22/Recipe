@@ -76,7 +76,7 @@ public class ShowPostActivity extends BasicActivity {
                     topScrolled = false;
                 }
 
-                if(firstVisibleItemPosition != 0) {
+                if(firstVisibleItemPosition < 0) {
                     postsUpdate(true);
                 }
             }
