@@ -146,42 +146,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <RelativeLayout
-        android:id="@+id/buttonsBackgroundLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#91646464"
-        android:visibility="gone">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:elevation="10dp"
-            app:cardCornerRadius="15dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="5dp">
-
-                <Button
-                    android:id="@+id/picture"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="사진촬영" />
-
-                <Button
-                    android:id="@+id/gallery"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="갤러리" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </RelativeLayout>
 
     <include
         layout="@layout/view_loader"
