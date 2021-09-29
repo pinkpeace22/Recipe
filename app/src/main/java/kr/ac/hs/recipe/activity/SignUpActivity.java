@@ -66,8 +66,11 @@ public class SignUpActivity extends BasicActivity {
                                     showToast(SignUpActivity.this, "회원가입에 성공하였습니다.");
                                     myStartActivity(MainActivity.class);
                                 } else {
-                                    if(task.getException() != null){
-                                        showToast(SignUpActivity.this, task.getException().toString());
+                                    if (task.getException() != null) {
+                                        if (task.getException().toString().equals("com.google.firebase.auth.FirebaseAuthWeakPasswordException: The given password is invalid. [ Password should be at least 6 characters ]"))
+                                            showToast(SignUpActivity.this, "비밀번호는 6자 이상이어야 합니다.");
+                                        if (task.getException().toString().equals("com.google.firebase.auth.FirebaseAuthInvalidCredentialsException: The email address is badly formatted."))
+                                            showToast(SignUpActivity.this, "올바른 이메일 형식이 아닙니다.");
                                     }
                                 }
                             }

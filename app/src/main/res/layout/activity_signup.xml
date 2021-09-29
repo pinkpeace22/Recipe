@@ -51,7 +51,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="비밀번호"
+                android:hint="비밀번호 (6자 이상)"
                 android:inputType="textPassword" />
 
             <EditText
