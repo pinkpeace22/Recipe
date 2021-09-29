@@ -67,21 +67,17 @@ public class ShowPostActivity extends BasicActivity {
                 RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
                 int firstVisibleItemPosition = ((LinearLayoutManager)layoutManager).findFirstVisibleItemPosition();
 
-                // 바로 아래 if 확인.... 새로고침에 약간 오류가 있어요 
-                // newState == 0 -> 스크롤X / == 1 -> 스크롤중
-                // 폰으로 구동시켜서 확인하면 무슨말인지앎
-/*                if(newState == 1) {
-                    postsUpdate(true);
-                    topScrolled = false;
-                }*/
-
-                if(newState == 1 && firstVisibleItemPosition == 0){
+                if (newState == 1 && firstVisibleItemPosition == 0) {
                     topScrolled = true;
                 }
 
-                if(newState == 0 && topScrolled){
+                if (newState == 0 && topScrolled) {
                     postsUpdate(true);
                     topScrolled = false;
+                }
+
+                if(firstVisibleItemPosition != 0) {
+                    postsUpdate(true);
                 }
             }
 
@@ -185,4 +181,6 @@ public class ShowPostActivity extends BasicActivity {
                     }
                 });
     }
+
+
 }
